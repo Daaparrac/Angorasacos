@@ -7,6 +7,7 @@ import { InventarioComponent } from './pages/inventario/inventario.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { HistoFacturaComponent } from './admin/histo-factura/histo-factura.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { HistoFacturaComponent } from './admin/histo-factura/histo-factura.compo
     LoginComponent,
     InventarioComponent,
     FooterComponent,
-    HistoFacturaComponent
+    HistoFacturaComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
