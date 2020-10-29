@@ -19,7 +19,7 @@
 <div class="d-flex h-100 mx-auto">
     <div class="row mx-auto">
         <div class="col-lg-3 mx-auto mt-5 pt-5" *ngFor="let item of center">
-            <a [href]="item.url">
+            <a [routerLink]="['/',item.url]">
                 <div class="card" style="width: 18rem;">
                     <img [src]="item.imagen" class="card-img-top" alt="...">
                     <div class="card-body">

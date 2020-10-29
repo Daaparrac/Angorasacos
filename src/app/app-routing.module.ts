@@ -43,6 +43,11 @@ const routes: Routes = [
     path: 'crearCliente',
     component: CrearClienteComponent,
   },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'login',
+  },
 ];
 
 @NgModule({
