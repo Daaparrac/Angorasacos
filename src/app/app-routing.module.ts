@@ -28,7 +28,7 @@ const routes: Routes = [
     component: InventarioComponent,
   },
   {
-    path: 'productos',
+    path: 'producto/:id',
     component: ProductosComponent,
   },
   {

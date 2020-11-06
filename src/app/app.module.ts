@@ -13,6 +13,8 @@ import { ProductosComponent } from './pages/productos/productos.component';
 import { FacturarComponent } from './pages/facturar/facturar.component';
 import { HistoFacturaComponent } from './pages/histo-factura/histo-factura.component';
 import { CrearClienteComponent } from './pages/crear-cliente/crear-cliente.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,13 +28,10 @@ import { CrearClienteComponent } from './pages/crear-cliente/crear-cliente.compo
     ProductosComponent,
     FacturarComponent,
     HistoFacturaComponent,
-    CrearClienteComponent
+    CrearClienteComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [HttpClientModule, FormsModule, BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

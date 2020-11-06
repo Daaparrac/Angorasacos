@@ -1,8 +1,14 @@
 export class productosModel {
   id_producto: string;
+  codigo: string;
   nombre: string;
   precio: string;
   imagen: string;
-  celular: string;
-  direccion: string;
+  xs: string;
+  s: string;
+  m: string;
+  l: string;
+  xl: string;
+  unica: string;
+  estado: boolean;
 }

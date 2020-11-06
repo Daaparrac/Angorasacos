@@ -1,2 +1,58 @@
 <app-header></app-header>
-<p>inventario works!</p>
+<!--div class="card mb-3 mx-auto" style="max-width: 540px;" *ngFor="let item of productos">
+    <div class="row no-gutters">
+        <div class="col-md-4 mt-3">
+            <img [src]="item.imagen" class="card-img-top" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h2 class="w-100 card-title"> {{item.nombre}}</h2>
+                <br>
+                <p class="card-text text-justify">{{item.s}}</p>
+                <p class="card-text text-justify"><small class="text-muted">{{item.m}} - {{item.l}}</small>
+                </p>
+
+                <button type="submit" class="btn btn-info w-100 mt-3" [routerLink]="['/heroe', item.id_producto]"
+                    routerLinkActive="router-link-active">Edit</button>
+            </div>
+        </div>
+    </div>
+</div-->
+<div class="mx-auto w-75 mt-5 table-responsive">
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Xs</th>
+                <th scope="col">S</th>
+                <th scope="col">M</th>
+                <th scope="col">L</th>
+                <th scope="col">XL</th>
+                <th scope="col">Unica</th>
+                <th scope="col">Opciones</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let item of productos">
+            <tr>
+                <th scope="row text-center">{{item.codigo}}
+                </th>
+                <td>{{item.nombre}}</td>
+                <td>{{item.precio}}</td>
+                <td>{{item.xs}}</td>
+                <td>{{item.s}}</td>
+                <td>{{item.m}}</td>
+                <td>{{item.l}}</td>
+                <td>{{item.xl}}</td>
+                <td>{{item.unica}}</td>
+                <td><a class="btn list-group-item-warning"
+                        [routerLink]="['/producto', item.id_producto]">Modificar</a><a
+                        class="btn ml-lg-3 list-group-item-danger">Ocultar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a class="btn colorbtn" [routerLink]="['/producto/nuevo']" routerLinkActive="router-link-active">Agregar
+        Productos</a>
+</div>

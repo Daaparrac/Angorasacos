@@ -1,2 +1,46 @@
 <app-header></app-header>
-<p>productos works!</p>
+
+
+<div class="bg" style="background-image: url('assets/img/Fondo.png')">
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+
+            <!-- Icon -->
+            <div class="title my-4">
+                <h1>Producto</h1>
+            </div>
+
+            <!-- Login Form -->
+            <form #prod_form="ngForm" (ngSubmit)=guardar(prod_form)>
+                <img [src]="productos.imagen" class="card-img-top" alt="...">
+                <input class="mt-2" class="fadeIn" type="text" [(ngModel)]="productos.codigo" name="codigo"
+                    placeholder="Código Producto">
+                <input type="text" class="fadeIn" [(ngModel)]="productos.nombre" name="nombre" required
+                    placeholder="Producto">
+                <input type="text" class="fadeIn" [(ngModel)]="productos.precio" name="precio" required
+                    placeholder="Precio">
+
+                <input class="mt-2" type="text" [(ngModel)]="productos.imagen" name="imagen"
+                    placeholder="imagen base64">
+                <br>
+                <label> Tallas y cantidades:</label>
+                <br>
+
+                <input type="text" class="fadeIn col-md-3" [(ngModel)]="productos.xs" name="xs" required
+                    placeholder="XS">
+                <input type="text" class="fadeIn col-md-3" [(ngModel)]="productos.s" name="s" required placeholder="S">
+                <input type="text" class="fadeIn col-md-3" [(ngModel)]="productos.m" name="m" required placeholder="M">
+                <input type="text" class="fadeIn col-md-3" [(ngModel)]="productos.l" name="l" required placeholder="L">
+                <input type="text" class="fadeIn col-md-3" [(ngModel)]="productos.xl" name="xl" required
+                    placeholder="XL">
+                <input type="text" class="fadeIn col-3" [(ngModel)]="productos.unica" name="unica" required
+                    placeholder="Unica">
+
+                <input type="submit" class="fadeIn" value="Ingresar">
+                <a type="button" class="fadeIn fourth " href="login">Volver</a>
+            </form>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+.colorbtn {
+  color: #ffffff !important;
+  background-color: #9b77ff !important;
+}
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+  background-color: #f2eefe; // Choose your own color here
+}

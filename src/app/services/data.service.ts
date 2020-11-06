@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { clientesModel } from '../models/clientes';
 import { map } from 'rxjs/operators';
+import { productosModel } from '../models/producto';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceNameService {
@@ -9,45 +10,47 @@ export class ServiceNameService {
 
   constructor(private _http: HttpClient) {}
 
-  getHeroes() {
+  getProductos() {
     return this._http
-      .get(`${this.url}/heroes.json`)
-      .pipe(map(this.crearArregloHeroe));
-  }
-  getHeroe(id) {
-    return this._http.get(`${this.url}/heroes/${id}.json`);
+      .get(`${this.url}/productos.json`)
+      .pipe(map(this.crearArregloProducto));
   }
 
-  putheroe(heroe: clientesModel) {
-    const HeroeTemp = {
-      ...heroe,
+  getProducto(id) {
+    console.log(this._http.get(`${this.url}/productos/${id}.json`));
+    return this._http.get(`${this.url}/productos/${id}.json`);
+  }
+
+  putProducto(producto: productosModel) {
+    const ProductoTemp = {
+      ...producto,
     };
-    delete HeroeTemp.id_cliente;
+    delete ProductoTemp.id_producto;
     return this._http.put(
-      `${this.url}/heroes/${heroe.id_cliente}.json`,
-      HeroeTemp
+      `${this.url}/productos/${producto.id_producto}.json`,
+      ProductoTemp
     );
   }
 
-  postheroe(heroe: clientesModel) {
-    return this._http.post(`${this.url}/heroes.json`, heroe).pipe(
+  postProducto(producto: productosModel) {
+    return this._http.post(`${this.url}/productos.json`, producto).pipe(
       map((resp: any) => {
-        heroe.id_cliente = resp.name;
-        return heroe;
+        producto.id_producto = resp.name;
+        return producto;
       })
     );
   }
-  private crearArregloHeroe(heroe: object) {
-    const heroes: clientesModel[] = [];
-    if (heroe === null) {
+  private crearArregloProducto(producto: object) {
+    const productos: productosModel[] = [];
+    if (producto === null) {
       return [];
     }
 
-    Object.keys(heroe).forEach((key) => {
-      const heroes2: clientesModel = heroe[key];
-      heroes2.id_cliente = key;
-      heroes.push(heroes2);
+    Object.keys(producto).forEach((key) => {
+      const producto2: productosModel = producto[key];
+      producto2.id_producto = key;
+      productos.push(producto2);
     });
-    return heroes;
+    return productos;
   }
 }
