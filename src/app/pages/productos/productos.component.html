@@ -37,8 +37,9 @@
                 <input type="text" class="fadeIn col-3" [(ngModel)]="productos.unica" name="unica" required
                     placeholder="Unica">
 
-                <input type="submit" class="fadeIn" value="Ingresar">
-                <a type="button" class="fadeIn fourth " href="login">Volver</a>
+                <input type="submit" class="fadeIn" value="Guardar">
+                <a type="button" class="fadeIn fourth " [routerLink]="['/inventario']"
+                    routerLinkActive="router-link-active">Volver</a>
             </form>
 
         </div>

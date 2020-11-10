@@ -17,7 +17,6 @@ export class ServiceNameService {
   }
 
   getProducto(id) {
-    console.log(this._http.get(`${this.url}/productos/${id}.json`));
     return this._http.get(`${this.url}/productos/${id}.json`);
   }
 
