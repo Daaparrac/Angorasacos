@@ -1,0 +1,26 @@
+<!--a class="btn btn-success w-100" [routerLink]="['/producto', 'nuevo']" routerLinkActive="router-link-active">New
+    producto</a-->
+<app-header></app-header>
+<div class="row">
+    <div class="card col-md-4 mt-5 mx-auto" style="width: 18rem;" *ngFor="let item of productos">
+        <div class="row no-gutters">
+            <img [src]="item.imagen" class="card-img-top" alt="...">
+
+
+            <div class="card-body">
+                <h4 class="w-100 card-title">{{item.codigo}} - {{item.nombre}}</h4>
+                <br>
+                <p class="card-text text-justify">Precio: {{item.precio}}</p>
+                <div class="row">
+                    <div class="card-text"> Tallas Disponibles:</div>
+                    <p class="col-2" *ngIf="item.xs !=0 "> xs</p>
+                    <p class="col-2" *ngIf="item.s !=0 "> s</p>
+                    <p class="col-2" *ngIf="item.m !=0 "> m</p>
+                    <p class="col-2" *ngIf="item.l !=0 "> l</p>
+                    <p class="col-2" *ngIf="item.xl !=0 "> xl</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

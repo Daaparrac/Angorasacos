@@ -61,6 +61,7 @@ h2 {
 /* FORM TYPOGRAPHY*/
 
 a[type="button"],
+button[type="submit"],
 input[type="submit"],
 input[type="reset"] {
   background-color: #9b77ff;
@@ -85,6 +86,7 @@ input[type="reset"] {
 }
 
 a[type="button"]:hover,
+button[type="submit"]:hover,
 input[type="submit"]:hover,
 input[type="reset"]:hover {
   background-color: #9370fd;
@@ -92,6 +94,7 @@ input[type="reset"]:hover {
 
 a[type="button"]:active,
 input[type="submit"]:active,
+button[type="submit"]:active,
 input[type="reset"]:active {
   -moz-transform: scale(0.95);
   -webkit-transform: scale(0.95);

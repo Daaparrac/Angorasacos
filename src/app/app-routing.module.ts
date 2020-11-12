@@ -9,6 +9,7 @@ import { ProductosComponent } from './pages/productos/productos.component';
 import { FacturarComponent } from './pages/facturar/facturar.component';
 import { HistoFacturaComponent } from './pages/histo-factura/histo-factura.component';
 import { CrearClienteComponent } from './pages/crear-cliente/crear-cliente.component';
+import { ProductsListComponent } from './pages/products-list/products-list.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,10 @@ const routes: Routes = [
   {
     path: 'crearCliente',
     component: CrearClienteComponent,
+  },
+  {
+    path: 'productos',
+    component: ProductsListComponent,
   },
   {
     path: '',

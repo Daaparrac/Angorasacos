@@ -15,6 +15,7 @@ import { HistoFacturaComponent } from './pages/histo-factura/histo-factura.compo
 import { CrearClienteComponent } from './pages/crear-cliente/crear-cliente.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ProductsListComponent } from './pages/products-list/products-list.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { FormsModule } from '@angular/forms';
     FacturarComponent,
     HistoFacturaComponent,
     CrearClienteComponent,
+    ProductsListComponent,
   ],
   imports: [HttpClientModule, FormsModule, BrowserModule, AppRoutingModule],
   providers: [],
