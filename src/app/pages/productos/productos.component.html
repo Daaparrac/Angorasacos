@@ -1,6 +1,3 @@
-<app-header></app-header>
-
-
 <div class="bg" style="background-image: url('assets/img/Fondo.png')">
     <div class="wrapper fadeInDown">
         <div id="formContent">
@@ -13,7 +10,7 @@
 
             <!-- Login Form -->
             <form #prod_form="ngForm" (ngSubmit)=guardar(prod_form)>
-                <img [src]="productos.imagen" class="card-img-top" alt="...">
+                <img [src]="productos.imagen" class="card-img-top w-75 mb-2" alt="...">
                 <input class="mt-2" class="fadeIn" type="text" [(ngModel)]="productos.codigo" name="codigo"
                     placeholder="Código Producto">
                 <input type="text" class="fadeIn" [(ngModel)]="productos.nombre" name="nombre" required
@@ -27,15 +24,24 @@
                 <label> Tallas y cantidades:</label>
                 <br>
 
-                <input type="text" class="fadeIn col-md-3" [(ngModel)]="productos.xs" name="xs" required
-                    placeholder="XS">
-                <input type="text" class="fadeIn col-md-3" [(ngModel)]="productos.s" name="s" required placeholder="S">
-                <input type="text" class="fadeIn col-md-3" [(ngModel)]="productos.m" name="m" required placeholder="M">
-                <input type="text" class="fadeIn col-md-3" [(ngModel)]="productos.l" name="l" required placeholder="L">
-                <input type="text" class="fadeIn col-md-3" [(ngModel)]="productos.xl" name="xl" required
-                    placeholder="XL">
-                <input type="text" class="fadeIn col-3" [(ngModel)]="productos.unica" name="unica" required
-                    placeholder="Unica">
+                <label> XS:</label>
+                <input type="text" class="fadeIn col-2" [(ngModel)]="productos.xs" name="xs" required placeholder="XS"
+                    maxlength="2">
+                <label> S:</label>
+                <input type="text" class="fadeIn col-2" [(ngModel)]="productos.s" name="s" required placeholder="S"
+                    maxlength="2">
+                <label> M:</label>
+                <input type="text" class="fadeIn col-2" [(ngModel)]="productos.m" name="m" required placeholder="M"
+                    maxlength="2"><br>
+                <label> L:</label>
+                <input type="text" class="fadeIn col-2" [(ngModel)]="productos.l" name="l" required placeholder="L"
+                    maxlength="2">
+                <label> XL:</label>
+                <input type="text" class="fadeIn col-2" [(ngModel)]="productos.xl" name="xl" required placeholder="XL"
+                    maxlength="2">
+                <label> Unica:</label>
+                <input type="text" class="fadeIn col-2" [(ngModel)]="productos.unica" name="unica" required
+                    placeholder="Unica" maxlength="2">
 
                 <input type="submit" class="fadeIn" value="Guardar">
                 <a type="button" class="fadeIn fourth " [routerLink]="['/inventario']"

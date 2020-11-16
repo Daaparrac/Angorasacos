@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  email: string;
   center = [
     {
       imagen: 'assets/img/inventory.png',
@@ -30,5 +31,7 @@ export class DashboardComponent implements OnInit {
   ];
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.email = localStorage.getItem('email');
+  }
 }
