@@ -28,9 +28,12 @@
                 <td>{{item.l}}</td>
                 <td>{{item.xl}}</td>
                 <td>{{item.unica}}</td>
-                <td><a class="btn list-group-item-warning"
-                        [routerLink]="['/producto', item.id_producto]">Modificar</a><a
-                        class="btn ml-lg-3 list-group-item-danger" (click)="ocultar(item)">Ocultar</a>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button class="btn list-group-item-warning" [routerLink]="['/producto', item.id_producto]"><i
+                                class="far fa-edit"></i></button>
+                        <button class="btn list-group-item-danger" (click)="ocultar(item)"><i
+                                class="far fa-eye-slash"></i></button></div>
                 </td>
 
             </tr>

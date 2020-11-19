@@ -25,7 +25,7 @@
                 maxlength="2">
             <div class="text-center col-12 mt-4">
                 <a type="button" class="fadeIn fourth" [routerLink]="['/inventario']"
-                    routerLinkActive="router-link-active">Agregar Producto</a>
+                    routerLinkActive="router-link-active"><i class="fas fa-cart-plus"></i> Agregar Producto</a>
             </div>
 
             <div class="title my-4 text-center col-12">
@@ -48,10 +48,6 @@
             <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.cliente" name="xs" required
                 placeholder="Dirección" maxlength="2">
 
-            <div class="text-center col-12 mt-3">
-                <a type="button" class="fadeIn fourth" [routerLink]="['/inventario']"
-                    routerLinkActive="router-link-active">Asociar Cliente</a>
-            </div>
             <div class="text-center col-12 mt-4">
                 <a type="button" class="fadeIn fourth" [routerLink]="['/crearCliente/nuevo']"
                     routerLinkActive="router-link-active">Crear Cliente Nuevo</a>
