@@ -36,6 +36,7 @@ export class ProductosComponent implements OnInit {
     if (form.invalid) {
       return;
     }
+
     Swal.fire({
       title: 'espere plox',
       icon: 'info',
@@ -49,6 +50,7 @@ export class ProductosComponent implements OnInit {
     if (this.productos.id_producto) {
       peticion = this._data.putProducto(this.productos);
     } else {
+      this.productos.estado = true;
       peticion = this._data.postProducto(this.productos);
     }
     peticion.subscribe((resp) => {

@@ -9,7 +9,7 @@
                 <h4>PRODUCTO</h4>
             </div>
             <label class="col-md-3 mr-2"> Código: </label>
-            <input type="text" class="fadeIn col-md-8" [(ngModel)]="productos.codigo" name="codigo" required
+            <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.codigo" name="codigo" required
                 placeholder="Código Producto" maxlength="2">
             <label class=" col-md-3 mr-2"> Cantidad: </label>
             <input type="text" class="fadeIn col-md-8" required placeholder="Cantidad" maxlength="2">
@@ -18,10 +18,10 @@
                 <h4>DESCUENTO</h4>
             </div>
             <label class="col-md-3 mr-2"> Código: </label>
-            <input type="text" class="fadeIn col-md-8" [(ngModel)]="productos.xs" name="xs" required
+            <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura" name="xs" required
                 placeholder="Código Descuento" maxlength="2">
             <label class=" col-md-3 mr-2"> Valor: </label>
-            <input type="text" class="fadeIn col-md-8" [(ngModel)]="productos.xs" name="xs" required placeholder="Valor"
+            <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura" name="xs" required placeholder="Valor"
                 maxlength="2">
             <div class="text-center col-12 mt-4">
                 <a type="button" class="fadeIn fourth" [routerLink]="['/inventario']"
@@ -36,16 +36,16 @@
 
             <input type="text" class="fadeIn col-md-8" placeholder="Search" />
             <label class="col-md-3 mr-2"> Código: </label>
-            <input type="text" class="fadeIn col-md-8" [(ngModel)]="productos.xs" name="xs" required
+            <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.cliente" name="xs" required
                 placeholder="Código Cliente" maxlength="2">
             <label class=" col-md-3 mr-2"> Nombre: </label>
-            <input type="text" class="fadeIn col-md-8" [(ngModel)]="productos.xs" name="xs" required
+            <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.cliente" name="xs" required
                 placeholder="Nombre" maxlength="2">
             <label class="col-md-3 mr-2"> Teléfono: </label>
-            <input type="text" class="fadeIn col-md-8" [(ngModel)]="productos.xs" name="xs" required
+            <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.cliente" name="xs" required
                 placeholder="Teléfono" maxlength="2">
             <label class=" col-md-3 mr-2"> Dirección: </label>
-            <input type="text" class="fadeIn col-md-8" [(ngModel)]="productos.xs" name="xs" required
+            <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.cliente" name="xs" required
                 placeholder="Dirección" maxlength="2">
 
             <div class="text-center col-12 mt-3">
@@ -53,7 +53,7 @@
                     routerLinkActive="router-link-active">Asociar Cliente</a>
             </div>
             <div class="text-center col-12 mt-4">
-                <a type="button" class="fadeIn fourth" [routerLink]="['/crearCliente']"
+                <a type="button" class="fadeIn fourth" [routerLink]="['/crearCliente/nuevo']"
                     routerLinkActive="router-link-active">Crear Cliente Nuevo</a>
             </div>
         </div>
@@ -72,18 +72,16 @@
                             <th scope="col">Total</th>
                         </tr>
                     </thead>
-                    <tbody *ngFor="let item of productos">
+                    <tbody *ngFor="let item of factura">
                         <tr>
                             <th scope="row text-center">{{item.codigo}}
                             </th>
-                            <td>{{item.nombre}}</td>
-                            <td>{{item.precio}}</td>
-                            <td>{{item.xs}}</td>
-                            <td>{{item.s}}</td>
-                            <td>{{item.m}}</td>
-                            <td>{{item.l}}</td>
-                            <td>{{item.xl}}</td>
-                            <td>{{item.unica}}</td>
+                            <td>{{item.producto}}</td>
+                            <td>{{item.cantidad}}</td>
+                            <td>{{item.producto.precio}}</td>
+                            <td>{{item.iva}</td>
+                            <td>{{item.descuento}}</td>
+                            <td>{{item.total}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -91,13 +89,13 @@
             <div class="col-6 position-absolute" style="right:0;">
 
                 <label class=" col-md-3 mr-2"> SUBTOTAL: </label>
-                <input type="text" class="fadeIn col-md-8" [(ngModel)]="productos.xs" name="xs" required
+                <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.subtotal" name="xs" required
                     placeholder="Subtotal" maxlength="2">
                 <label class=" col-md-3 mr-2"> IVA: </label>
-                <input type="text" class="fadeIn col-md-8" [(ngModel)]="productos.xs" name="xs" required
+                <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.iva" name="xs" required
                     placeholder="IVA" maxlength="2">
                 <label class=" col-md-3 mr-2"> TOTAL: </label>
-                <input type="text" class="fadeIn col-md-8" [(ngModel)]="productos.xs" name="xs" required
+                <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.total" name="xs" required
                     placeholder="Total" maxlength="2">
                 <div class="text-center mt-2">
                     <a type="button" class="fadeIn fourth mr-2" href="login">Pagar</a>

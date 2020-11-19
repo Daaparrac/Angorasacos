@@ -1,12 +1,13 @@
 import { productosModel } from './producto';
 import { clientesModel } from './clientes';
+import { descuentoModel } from './descuento';
 export class facturaModel {
   id_factura: string;
   codigo: string;
-  producto: productosModel;
+  producto: productosModel[];
   cantidad: string;
   iva: string;
-  descuento: string;
+  descuento: descuentoModel;
   total: string;
   subtotal: string;
   cliente: clientesModel;

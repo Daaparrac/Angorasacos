@@ -47,7 +47,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'crearCliente',
+    path: 'crearCliente/:id',
     component: CrearClienteComponent,
     canActivate: [AuthGuard],
   },

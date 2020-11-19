@@ -9,15 +9,20 @@
             </div>
 
             <!-- Login Form -->
-            <form>
-                <input type="text" id="login" class="fadeIn second" name="login" placeholder="Nombre Completo">
-                <input type="text" id="password" class="fadeIn third" name="login" placeholder="Documento de identidad">
-                <input type="text" id="login" class="fadeIn second" name="login" placeholder="Correo electronico">
-                <input type="text" id="password" class="fadeIn third" name="login" placeholder="Número Celular">
-                <input type="text" id="password" class="fadeIn third" name="login" placeholder="Dirección">
+            <form #cli_form="ngForm" (ngSubmit)=guardar(cli_form)>
+                <input type="text" [(ngModel)]="clientes.nombre" class="fadeIn second" name="nombre"
+                    placeholder="Nombre Completo">
+                <input type="text" [(ngModel)]="clientes.documento" class="fadeIn third" name="documento"
+                    placeholder="Documento de identidad">
+                <input type="text" [(ngModel)]="clientes.correo" class="fadeIn second" name="correo"
+                    placeholder="Correo electronico">
+                <input type="text" [(ngModel)]="clientes.celular" class="fadeIn third" name="celular"
+                    placeholder="Número Celular">
+                <input type="text" [(ngModel)]="clientes.direccion" class="fadeIn third" name="Dirección"
+                    placeholder="Dirección">
 
-                <a type="button" class="fadeIn fourth" href="login">Crear</a>
-                <a type="button" class="fadeIn fourth " href="login">Volver</a>
+                <input type="submit" class="fadeIn" value="Crear">
+                <a type="button" class="fadeIn fourth " href="facturar">Volver</a>
             </form>
 
         </div>

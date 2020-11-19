@@ -16,8 +16,8 @@
                 <th scope="col">Opciones</th>
             </tr>
         </thead>
-        <tbody *ngFor="let item of productos">
-            <tr>
+        <tbody>
+            <tr *ngFor="let item of productos">
                 <th scope="row text-center">{{item.codigo}}
                 </th>
                 <td>{{item.nombre}}</td>
@@ -30,8 +30,9 @@
                 <td>{{item.unica}}</td>
                 <td><a class="btn list-group-item-warning"
                         [routerLink]="['/producto', item.id_producto]">Modificar</a><a
-                        class="btn ml-lg-3 list-group-item-danger">Ocultar</a>
+                        class="btn ml-lg-3 list-group-item-danger" (click)="ocultar(item)">Ocultar</a>
                 </td>
+
             </tr>
         </tbody>
     </table>
