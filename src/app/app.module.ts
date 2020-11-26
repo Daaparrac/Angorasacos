@@ -16,6 +16,7 @@ import { CrearClienteComponent } from './pages/crear-cliente/crear-cliente.compo
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
+import { SharedModule } from './pipes/share.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,13 @@ import { ProductsListComponent } from './pages/products-list/products-list.compo
     CrearClienteComponent,
     ProductsListComponent,
   ],
-  imports: [HttpClientModule, FormsModule, BrowserModule, AppRoutingModule],
+  imports: [
+    HttpClientModule,
+    SharedModule,
+    FormsModule,
+    BrowserModule,
+    AppRoutingModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

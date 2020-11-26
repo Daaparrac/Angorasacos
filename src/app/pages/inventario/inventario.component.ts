@@ -25,7 +25,7 @@ export class InventarioComponent implements OnInit {
     Swal.fire({
       title: 'Información Importante',
       text:
-        'Por favor confirme que va a ocultar este producto de forma permanente, esta acción no se puede deshacer',
+        'Por favor confirme que va a inactivar este producto de forma permanente, esta acción no se puede deshacer',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
@@ -33,7 +33,7 @@ export class InventarioComponent implements OnInit {
       confirmButtonText: 'Si, Ocultar',
     }).then((result) => {
       if (result.value) {
-        productos.estado = false;
+        productos.estado = 'Inactivo';
 
         Swal.fire({
           title: 'Espere',
@@ -49,7 +49,43 @@ export class InventarioComponent implements OnInit {
 
         peticion.subscribe((resp) => {
           Swal.fire({
-            title: 'Producto Ocultado',
+            title: 'Producto Inactivo',
+            icon: 'success',
+          });
+        });
+      }
+    });
+  }
+
+  activar(productos: productosModel) {
+    Swal.fire({
+      title: 'Información Importante',
+      text:
+        'Por favor confirme que va a Activar este producto de forma permanente, esta acción no se puede deshacer',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Si, Activar',
+    }).then((result) => {
+      if (result.value) {
+        productos.estado = 'Activo';
+
+        Swal.fire({
+          title: 'Espere',
+          icon: 'info',
+          text: 'Guardando información',
+          allowOutsideClick: false,
+        });
+        Swal.showLoading();
+
+        let peticion: Observable<any>;
+
+        peticion = this._data.putProducto(productos);
+
+        peticion.subscribe((resp) => {
+          Swal.fire({
+            title: 'Producto Activado',
             icon: 'success',
           });
         });

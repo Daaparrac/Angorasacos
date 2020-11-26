@@ -6,13 +6,10 @@
             <tr>
                 <th scope="col">Código</th>
                 <th scope="col">Producto</th>
+                <th scope="col">Color</th>
                 <th scope="col">Precio</th>
-                <th scope="col">Xs</th>
-                <th scope="col">S</th>
-                <th scope="col">M</th>
-                <th scope="col">L</th>
-                <th scope="col">XL</th>
-                <th scope="col">Unica</th>
+                <th scope="col">Talla</th>
+                <th scope="col">Estado</th>
                 <th scope="col">Opciones</th>
             </tr>
         </thead>
@@ -21,19 +18,20 @@
                 <th scope="row text-center">{{item.codigo}}
                 </th>
                 <td>{{item.nombre}}</td>
+                <td>{{item.color}}</td>
                 <td>{{item.precio}}</td>
-                <td>{{item.xs}}</td>
-                <td>{{item.s}}</td>
-                <td>{{item.m}}</td>
-                <td>{{item.l}}</td>
-                <td>{{item.xl}}</td>
-                <td>{{item.unica}}</td>
+                <td>{{item.talla}}</td>
+                <td>{{item.estado}}</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button class="btn list-group-item-warning" [routerLink]="['/producto', item.id_producto]"><i
                                 class="far fa-edit"></i></button>
                         <button class="btn list-group-item-danger" (click)="ocultar(item)"><i
-                                class="far fa-eye-slash"></i></button></div>
+                                class="far fa-eye-slash"></i></button>
+                        <button class="btn list-group-item-success" (click)="
+                            activar(item)"><i class="far fa-eye"></i></button>
+
+                    </div>
                 </td>
 
             </tr>
