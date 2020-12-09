@@ -1,2 +1,31 @@
 <app-header></app-header>
-<p>histo-factura works!</p>
+
+<div class="mx-auto w-75 table-responsive" style="margin-top: 5rem;">
+    <input class="form-control" id="myInput" type="text" (input)="search()" placeholder="Search..">
+    <br>
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Valor total</th>
+                <th scope="col">Opciones</th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            <tr *ngFor="let item of facturas">
+                <th scope="row text-center">{{item.codigo}}
+                </th>
+                <td>{{item.codigo}}</td>
+                <td>{{item.cliente.nombre}}</td>
+                <td>{{item.total}}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button class="btn list-group-item-warning" [routerLink]="['/facturaGenerada', item.id_factura]"><i class="far fa-edit"></i></button>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

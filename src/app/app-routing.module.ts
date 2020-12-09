@@ -11,6 +11,7 @@ import { HistoFacturaComponent } from './pages/histo-factura/histo-factura.compo
 import { CrearClienteComponent } from './pages/crear-cliente/crear-cliente.component';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
 import { AuthGuard } from './guards/auth.guard';
+import { GenerarFacturaComponent } from './pages/generar-factura/generar-factura.component';
 
 const routes: Routes = [
   {
@@ -54,6 +55,16 @@ const routes: Routes = [
   {
     path: 'productos',
     component: ProductsListComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'facturaGenerada',
+    component: GenerarFacturaComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'facturaGenerada/:id',
+    component: GenerarFacturaComponent,
     canActivate: [AuthGuard],
   },
   {

@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { InventarioComponent } from './pages/inventario/inventario.component';
@@ -17,6 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
 import { SharedModule } from './pipes/share.module';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { GenerarFacturaComponent } from './pages/generar-factura/generar-factura.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { SharedModule } from './pipes/share.module';
     HistoFacturaComponent,
     CrearClienteComponent,
     ProductsListComponent,
+    GenerarFacturaComponent,
   ],
   imports: [
     HttpClientModule,
@@ -39,6 +41,7 @@ import { SharedModule } from './pipes/share.module';
     FormsModule,
     BrowserModule,
     AppRoutingModule,
+    NgSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

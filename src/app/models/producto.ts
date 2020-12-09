@@ -1,14 +1,18 @@
+import { tallamodel } from './talla';
 export class productosModel {
   id_producto: string;
   codigo: string;
   nombre: string;
   color: string;
-  precio: string;
   imagen: string;
   talla: string;
+  //talla: tallamodel[];
   cantidad: number;
   estado: string;
   estado_cambio: string;
+  subtotal: string;
+  IVA: string;
+  total: string;
 }
 
 /*

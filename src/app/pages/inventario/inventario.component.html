@@ -1,6 +1,8 @@
 <app-header></app-header>
 
 <div class="mx-auto w-75 table-responsive" style="margin-top: 5rem;">
+    <input class="form-control" id="myInput" type="text" (input)="search()" placeholder="Search..">
+    <br>
     <table class="table table-striped ">
         <thead>
             <tr>
@@ -9,34 +11,35 @@
                 <th scope="col">Color</th>
                 <th scope="col">Precio</th>
                 <th scope="col">Talla</th>
+                <th scope="col">Cantidad</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Opciones</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="myTable">
             <tr *ngFor="let item of productos">
                 <th scope="row text-center">{{item.codigo}}
                 </th>
                 <td>{{item.nombre}}</td>
                 <td>{{item.color}}</td>
-                <td>{{item.precio}}</td>
+                <td>{{item.total}}</td>
                 <td>{{item.talla}}</td>
+                <td>{{item.cantidad}}</td>
                 <td>{{item.estado}}</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button class="btn list-group-item-warning" [routerLink]="['/producto', item.id_producto]"><i
                                 class="far fa-edit"></i></button>
-                        <button class="btn list-group-item-danger" (click)="ocultar(item)"><i
-                                class="far fa-eye-slash"></i></button>
-                        <button class="btn list-group-item-success" (click)="
+                        <button class="btn list-group-item-danger" *ngIf="item.estado == 'Activo'" (click)="ocultar(item)"><i class="far fa-eye-slash"></i></button>
+                        <button class="btn list-group-item-success" *ngIf="item.estado == 'Inactivo'" (click)="
                             activar(item)"><i class="far fa-eye"></i></button>
 
                     </div>
                 </td>
-
             </tr>
         </tbody>
     </table>
-    <a class="btn colorbtn" [routerLink]="['/producto/nuevo']" routerLinkActive="router-link-active">Agregar
+    <a class="btn colorbtn" [routerLink]="['/producto/nuevo']" routerLinkActive="router-link-active"><i
+            class="fas fa-plus"></i> Agregar
         Productos</a>
 </div>

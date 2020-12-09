@@ -11,24 +11,19 @@
             <!-- Login Form -->
             <form #prod_form="ngForm" (ngSubmit)=guardar(prod_form) class="hide-inputbtns">
                 <img [src]="productos.imagen" class="card-img-top w-75 mb-2" alt="...">
-                <input class="mt-2" class="fadeIn" type="text" [(ngModel)]="productos.codigo" name="codigo"
-                    placeholder="Código Producto" disabled>
-                <input type="text" class="fadeIn" [(ngModel)]="productos.nombre"
-                    (input)="createcodcompleto($event.target.value)" name="nombre" placeholder="Producto">
-                <input type="text" class="fadeIn" [(ngModel)]="productos.color" name="color" placeholder="Color"
-                    (input)="createcodcompleto($event.target.value)">
-                <input type="text" class="fadeIn currency" [(ngModel)]="productos.precio" name="precio"
-                    placeholder="Precio" (input)="createcodcompleto($event.target.value)">
-                <input class="mt-2" type="text" [(ngModel)]="productos.estado_cambio" name="estadop"
-                    placeholder="Motivo ingreso">
-                <input class="mt-2" type="text" [(ngModel)]="productos.imagen" name="imagen" placeholder="imagen base64"
-                    required>
+                <input class="mt-2" class="fadeIn" type="text" [(ngModel)]="productos.codigo" name="codigo" placeholder="Código Producto" disabled>
+                <input type="text" class="fadeIn" [(ngModel)]="productos.nombre" (input)="createcodcompleto($event.target.value)" name="nombre" placeholder="Producto">
+                <input type="text" class="fadeIn" [(ngModel)]="productos.color" name="color" placeholder="Color" (input)="createcodcompleto($event.target.value)">
+                <input class="mt-2" type="text" [(ngModel)]="productos.estado_cambio" name="estadop" placeholder="Motivo ingreso">
+                <input class="mt-2" type="text" [(ngModel)]="productos.imagen" name="imagen" placeholder="imagen base64" required>
+                <input type="text" class="fadeIn currency" [(ngModel)]="productos.total" name="total" placeholder="Precio Total" (input)="createIvaSub($event.target.value);">
+                <input type="text" class="fadeIn currency" [(ngModel)]="productos.IVA" name="IVA" placeholder="IVA" (input)="createIvaSub($event.target.value)">
+                <input type="text" class="fadeIn currency" [(ngModel)]="productos.subtotal" name="subtotal" placeholder="Precio sin IVA" (input)="createcodcompleto($event.target.value)">
                 <br>
                 <label> Tallas y cantidades:</label>
                 <br>
                 <label> Talla:</label>
-                <select type="text" class="fadeIn col-2" [(ngModel)]="productos.talla" name="cantidad"
-                    (change)="createcodcompleto($event.target.value)">
+                <select type="text" class="fadeIn col-2" [(ngModel)]="productos.talla" name="cantidad" (change)="createcodcompleto($event.target.value)">
                     <option value="XS">XS</option>
                     <option value="S">S</option>
                     <option value="M">M</option>
@@ -37,11 +32,9 @@
                     <option value="Unica">Unica</option>
                 </select>
                 <label> Cantidad:</label>
-                <input type="number" class="fadeIn col-2" [(ngModel)]="productos.cantidad" name="cantidad"
-                    placeholder="##" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;">
+                <input type="number" class="fadeIn col-2" [(ngModel)]="productos.cantidad" name="cantidad" placeholder="##" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;">
                 <button type="submit" class="fadeIn" value="Guardar">Guardar</button>
-                <a type="button" class="fadeIn fourth " [routerLink]="['/inventario']"
-                    routerLinkActive="router-link-active">Volver</a>
+                <a type="button" class="fadeIn fourth " [routerLink]="['/inventario']" routerLinkActive="router-link-active">Volver</a>
             </form>
 
         </div>

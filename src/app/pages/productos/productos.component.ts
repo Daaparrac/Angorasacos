@@ -27,7 +27,7 @@ export class ProductosComponent implements OnInit {
   codigop = null;
   ngOnInit(): void {
     this.id = this._activatedRoute.snapshot.paramMap.get('id');
-    if (this.id != 'nuevo') {
+    if (this.id !== 'nuevo') {
       this._data.getProducto(this.id).subscribe((data: productosModel) => {
         this.productos = data;
         this.productos.id_producto = this.id;
@@ -39,9 +39,9 @@ export class ProductosComponent implements OnInit {
   }
 
   createcodcompleto(texts: string) {
-    let textitos1 = `${this.productos.nombre} ${this.productos.color}`;
-    let textitos2 = `${this.productos.talla}`;
-    let textitos = `${this.productos.precio}`;
+    const textitos1 = `${this.productos.nombre} ${this.productos.color}`;
+    const textitos2 = `${this.productos.talla}`;
+    const textitos = `${this.productos.subtotal}`;
     this.productos.codigo = `${this._pipelearn.transform(
       textitos1
     )}${this._pipelearn.transform1(textitos2)} - ${this._pipelearn.transform2(
@@ -51,6 +51,28 @@ export class ProductosComponent implements OnInit {
 
   create(texts: string) {
     console.log(this.productos.talla);
+  }
+
+  createIvaSub(texts: string) {
+    this.createcodcompleto(texts);
+    const textoprecio = `${this.productos.total}`;
+    const textoIVA = `${this.productos.IVA}`;
+    const total =
+      parseInt(textoprecio) -
+      (parseInt(textoprecio) * parseInt(textoIVA)) / 100;
+    console.log(total);
+    this.productos.subtotal = `${total}`;
+    console.log(this.productos.IVA);
+  }
+
+  createTotSub(texts: string) {
+    const textostotal = `${this.productos.subtotal}`;
+    const textoIVA = `${this.productos.IVA}`;
+
+    console.log(textoIVA);
+    console.log(textostotal);
+    this.productos.subtotal = `${this._pipelearn.preciop(textostotal)}`;
+    console.log(this.productos.subtotal);
   }
 
   guardar(form: NgForm) {
@@ -75,6 +97,7 @@ export class ProductosComponent implements OnInit {
       this.productos.estado = 'Activo';
       peticion = this._data.postProducto(this.productos);
     }
+
     peticion.subscribe((resp) => {
       Swal.fire({
         title: this.productos.nombre,

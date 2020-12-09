@@ -43,4 +43,8 @@ export class SlugifyPipe implements PipeTransform {
       .replace(/^-+/, '')
       .replace(/-+$/, '');
   }
+
+  preciop(subtotal: string): string {
+    return subtotal;
+  }
 }

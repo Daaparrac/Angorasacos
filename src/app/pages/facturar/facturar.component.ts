@@ -5,7 +5,9 @@ import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Observable } from 'rxjs';
 import { NgForm } from '@angular/forms';
-
+import { productosModel } from '../../models/producto';
+import { clientesModel } from '../../models/clientes';
+declare var $: any;
 @Component({
   selector: 'app-facturar',
   templateUrl: './facturar.component.html',
@@ -13,7 +15,14 @@ import { NgForm } from '@angular/forms';
 })
 export class FacturarComponent implements OnInit {
   factura: facturaModel = new facturaModel();
-  id = null;
+  id = '';
+  producto: productosModel[] = [];
+  producto2: productosModel = new productosModel();
+  cliente: clientesModel[] = [];
+  cliente2: clientesModel = new clientesModel();
+  selectedItem: string;
+  prod_Fact = [];
+
   constructor(
     private _data: ServiceNameService,
     private _activatedRoute: ActivatedRoute
@@ -21,15 +30,12 @@ export class FacturarComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this._activatedRoute.snapshot.paramMap.get('id');
-    if (this.id != 'nuevo') {
-      this._data.getProducto(this.id).subscribe((data: facturaModel) => {
-        this.factura = data;
-        this.factura.id_factura = this.id;
-      });
-    }
-    if (this.id == 'nuevo') {
+
+    if (this.id === 'facturar') {
       this.factura.id_factura = null;
     }
+    this._data.getClientes().subscribe((rest) => (this.cliente = rest));
+    this._data.getProductos().subscribe((rest) => (this.producto = rest));
   }
 
   guardar(form: NgForm) {
@@ -58,5 +64,34 @@ export class FacturarComponent implements OnInit {
         text: 'se actualizó',
       });
     });
+  }
+
+  selectProducto(id_producto: productosModel) {
+    this.producto2 = id_producto;
+    console.log(this.producto2);
+  }
+
+  selectCliente(idcliente: clientesModel) {
+    this.cliente2 = idcliente;
+  }
+
+  addProducto(id_producto: productosModel) {
+    const cantidad = this.producto2.cantidad - $('#cantidadpro').val();
+    if (cantidad < 0) {
+      Swal.fire({
+        icon: 'error',
+        text: `Solo se tiene existencia de ${this.producto2.cantidad} productos`,
+      });
+    } else {
+      this.producto2.cantidad = $('#cantidadpro').val();
+      this.producto2.total = (
+        parseInt($('#cantidadpro').val()) * parseInt(this.producto2.subtotal)
+      ).toString();
+      this.prod_Fact.push(id_producto);
+
+      console.log(cantidad);
+      console.log(this.prod_Fact);
+      //this.selectProducto(id_producto);
+    }
   }
 }

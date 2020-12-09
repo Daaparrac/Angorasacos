@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { clientesModel } from '../models/clientes';
-import { map } from 'rxjs/operators';
 import { productosModel } from '../models/producto';
 import { facturaModel } from '../models/factura';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceNameService {

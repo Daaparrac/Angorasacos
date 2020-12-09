@@ -1,60 +1,49 @@
 <app-header></app-header>
 
-<!--form #prod_form="ngForm" (ngSubmit)=guardar(prod_form) class="arribap"-->
-<form class="arribap">
+<form #prod_form="ngForm" (ngSubmit)=guardar(prod_form) class="arribap">
+    <!--form class="arribap"-->
     <div class="form-row w-100">
         <!--inputs-->
-        <div class="col-4 pl-md-5 pl-2">
+        <div class="col-3 text-center pl-md-5 pl-2">
             <div class="title text-center my-4 col-12">
                 <h4>PRODUCTO</h4>
             </div>
-            <label class="col-md-3 mr-2"> Código: </label>
-            <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.codigo" name="codigo" required
-                placeholder="Código Producto" maxlength="2">
-            <label class=" col-md-3 mr-2"> Cantidad: </label>
-            <input type="text" class="fadeIn col-md-8" required placeholder="Cantidad" maxlength="2">
-
+            <ng-select [ngModel]="selectedItem" class="fadeIn mx-auto w-75" (change)="selectProducto($event)" name="codigo_pro" id="product">
+                <ng-option *ngFor="let item of producto" [value]="item">
+                    {{item.codigo}} - {{ item.nombre }}</ng-option>
+            </ng-select>
+            <input type="text" class="fadeIn" id="cantidadpro" required placeholder="Cantidad" maxlength="3">
+            <!--
             <div class="title my-4 text-center col-12">
                 <h4>DESCUENTO</h4>
             </div>
             <label class="col-md-3 mr-2"> Código: </label>
-            <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura" name="xs" required
-                placeholder="Código Descuento" maxlength="2">
+            select type="text" class="fadeIn col-md-8" [(ngModel)]="descuento.id" name="xs" required placeholder="Código Descuento" maxlength="2"></select>
             <label class=" col-md-3 mr-2"> Valor: </label>
-            <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura" name="xs" required placeholder="Valor"
-                maxlength="2">
+            <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.cantidad" name="valor" required placeholder="Valor" maxlength="2">-->
             <div class="text-center col-12 mt-4">
-                <a type="button" class="fadeIn fourth" [routerLink]="['/inventario']"
-                    routerLinkActive="router-link-active"><i class="fas fa-cart-plus"></i> Agregar Producto</a>
+                <a type="button" class="fadeIn fourth" (click)="addProducto(producto2)"><i class="fas fa-cart-plus"></i>
+                    Agregar Producto</a>
             </div>
 
             <div class="title my-4 text-center col-12">
                 <h4>CLIENTE</h4>
             </div>
 
-            <label class="col-md-3 mr-2"> Cedula: </label>
-
-            <input type="text" class="fadeIn col-md-8" placeholder="Search" />
-            <label class="col-md-3 mr-2"> Código: </label>
-            <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.cliente" name="xs" required
-                placeholder="Código Cliente" maxlength="2">
-            <label class=" col-md-3 mr-2"> Nombre: </label>
-            <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.cliente" name="xs" required
-                placeholder="Nombre" maxlength="2">
-            <label class="col-md-3 mr-2"> Teléfono: </label>
-            <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.cliente" name="xs" required
-                placeholder="Teléfono" maxlength="2">
-            <label class=" col-md-3 mr-2"> Dirección: </label>
-            <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.cliente" name="xs" required
-                placeholder="Dirección" maxlength="2">
+            <ng-select [ngModel]="selectedItem" class="fadeIn mx-auto w-75" (change)="selectCliente($event)" name="clientep">
+                <ng-option *ngFor="let item of cliente" [value]="item">
+                    {{item.documento}} - {{ item.nombre }}</ng-option>
+            </ng-select>
+            <input type="text" class="fadeIn" [(ngModel)]="cliente2.correo" name="correo" placeholder="Código Cliente" maxlength="2" disabled>
+            <input type="text" class="fadeIn" [(ngModel)]="cliente2.celular" name="telefono" placeholder="Teléfono" maxlength="2" disabled>
+            <input type="text" class="fadeIn" [(ngModel)]="cliente2.direccion" name="direccion" placeholder="Dirección" maxlength="2" disabled>
 
             <div class="text-center col-12 mt-4">
-                <a type="button" class="fadeIn fourth" [routerLink]="['/crearCliente/nuevo']"
-                    routerLinkActive="router-link-active">Crear Cliente Nuevo</a>
+                <a type="button" class="fadeIn fourth" [routerLink]="['/crearCliente/nuevo']" routerLinkActive="router-link-active"><i class="fas fa-user-plus"></i> Crear Cliente Nuevo</a>
             </div>
         </div>
         <!--tabla y total-->
-        <div class="col-7">
+        <div class="col-8">
             <div class="mx-auto w-75 table-responsive h-75 my-4">
                 <table class="table table-striped ">
                     <thead>
@@ -64,38 +53,34 @@
                             <th scope="col">Cantidad</th>
                             <th scope="col">Valor unitario</th>
                             <th scope="col">IVA</th>
-                            <th scope="col">Descuento</th>
                             <th scope="col">Total</th>
                         </tr>
                     </thead>
-                    <tbody *ngFor="let item of factura">
-                        <tr>
+                    <tbody>
+                        <tr *ngFor="let item of prod_Fact">
                             <th scope="row text-center">{{item.codigo}}
                             </th>
-                            <td>{{item.producto}}</td>
-                            <td>{{item.cantidad}}</td>
-                            <td>{{item.producto.precio}}</td>
-                            <td>{{item.iva}</td>
-                            <td>{{item.descuento}}</td>
-                            <td>{{item.total}}</td>
+                            <th>{{item.nombre}}</th>
+                            <th>{{item.cantidad}}</th>
+                            <th>{{item.subtotal}}</th>
+                            <th>{{item.IVA}}</th>
+                            <th>{{item.total}}</th>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="col-6 position-absolute" style="right:0;">
-
                 <label class=" col-md-3 mr-2"> SUBTOTAL: </label>
-                <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.subtotal" name="xs" required
-                    placeholder="Subtotal" maxlength="2">
+                <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.iva" name="subtotal" placeholder="Subtotal" maxlength="2">
                 <label class=" col-md-3 mr-2"> IVA: </label>
-                <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.iva" name="xs" required
-                    placeholder="IVA" maxlength="2">
+                <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.iva" name="iva" placeholder="IVA" maxlength="2">
                 <label class=" col-md-3 mr-2"> TOTAL: </label>
-                <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.total" name="xs" required
-                    placeholder="Total" maxlength="2">
+                <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.total" name="total" placeholder="Total" maxlength="2">
                 <div class="text-center mt-2">
-                    <a type="button" class="fadeIn fourth mr-2" href="login">Pagar</a>
-                    <a type="button" class="fadeIn fourth " href="login">Limpiar</a></div>
+                    <a type="button" class="fadeIn fourth mr-2" href="facturaGenerada"><i class="fas fa-receipt"></i>
+                        Pagar</a>
+                    <a type="button" class="fadeIn fourth " href="login"><i class="fas fa-broom"></i> Limpiar</a>
+                </div>
             </div>
 
         </div>

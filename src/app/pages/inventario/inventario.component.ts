@@ -4,7 +4,7 @@ import { ServiceNameService } from '../../services/data.service';
 import { productosModel } from '../../models/producto';
 import Swal from 'sweetalert2';
 import { Observable } from 'rxjs';
-
+declare var $: any;
 @Component({
   selector: 'app-inventario',
   templateUrl: './inventario.component.html',
@@ -90,6 +90,15 @@ export class InventarioComponent implements OnInit {
           });
         });
       }
+    });
+  }
+
+  search() {
+    $('#myInput').on('keyup', function () {
+      var value = $(this).val().toLowerCase();
+      $('#myTable tr').filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+      });
     });
   }
 }
