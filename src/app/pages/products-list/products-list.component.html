@@ -2,8 +2,8 @@
     producto</a-->
 <app-header></app-header>
 <div class="row w-100 mx-auto">
-    <div class="card col-md-3 col-xs-12 mx-auto border-0" style="margin-top: 5rem;" *ngFor="let item of productos">
-        <div *ngIf="item.nombre">
+    <ng-container *ngFor="let item of productos">
+        <div class="card col-md-3 col-xs-12 mx-auto border-0" style="margin-top: 5rem;" *ngIf="item.estado == 'Activo'">
             <div class="row no-gutters">
                 <img [src]="item.imagen" class="card-img-top mt-3" alt="...">
                 <div class="card-body">
@@ -22,5 +22,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </ng-container>
 </div>

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { facturaModel } from '../../models/factura';
+import { FacturaModel } from '../../models/factura';
 import { ServiceNameService } from '../../services/data.service';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
-import { Observable } from 'rxjs';
+import { empty, Observable } from 'rxjs';
 import { NgForm } from '@angular/forms';
-import { productosModel } from '../../models/producto';
-import { clientesModel } from '../../models/clientes';
+import { ProductosModel } from '../../models/producto';
+import { ClientesModel } from '../../models/clientes';
 declare var $: any;
 @Component({
   selector: 'app-facturar',
@@ -14,34 +14,47 @@ declare var $: any;
   styleUrls: ['./facturar.component.scss'],
 })
 export class FacturarComponent implements OnInit {
-  factura: facturaModel = new facturaModel();
+  factura: FacturaModel = new FacturaModel();
   id = '';
-  producto: productosModel[] = [];
-  producto2: productosModel = new productosModel();
-  cliente: clientesModel[] = [];
-  cliente2: clientesModel = new clientesModel();
+  producto: ProductosModel[] = [];
+  producto2: ProductosModel = new ProductosModel();
+  cliente: ClientesModel[] = [];
+  cliente2: ClientesModel = new ClientesModel();
   selectedItem: string;
-  prod_Fact = [];
+  prodFact = [];
+  totalf = 0;
+  subtotalf = 0;
+  ivaf = 0;
+  cantidadpro = 0;
+  cantidadtab: number;
+  table: string;
 
   constructor(
-    private _data: ServiceNameService,
-    private _activatedRoute: ActivatedRoute
-  ) {}
+    private datap: ServiceNameService,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
-    this.id = this._activatedRoute.snapshot.paramMap.get('id');
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
 
     if (this.id === 'facturar') {
-      this.factura.id_factura = null;
+      this.factura.idFactura = null;
     }
-    this._data.getClientes().subscribe((rest) => (this.cliente = rest));
-    this._data.getProductos().subscribe((rest) => (this.producto = rest));
+    this.datap.getClientes().subscribe((rest) => (this.cliente = rest));
+    this.datap.getProductos().subscribe((rest) => (this.producto = rest));
   }
 
   guardar(form: NgForm) {
     if (form.invalid) {
       return;
     }
+    this.factura.cliente = this.cliente2;
+    this.factura.producto = this.prodFact;
+    this.factura.estado = true;
+    this.factura.total = this.totalf.toString();
+    this.factura.subtotal = this.subtotalf.toString();
+    this.factura.iva = this.ivaf.toString();
+
     Swal.fire({
       title: 'espere plox',
       icon: 'info',
@@ -52,46 +65,140 @@ export class FacturarComponent implements OnInit {
 
     let peticion: Observable<any>;
 
-    if (this.factura.id_factura) {
-      peticion = this._data.putFactura(this.factura);
-    } else {
-      peticion = this._data.postFactura(this.factura);
-    }
-    peticion.subscribe((resp) => {
-      Swal.fire({
-        title: this.factura.codigo,
-        icon: 'success',
-        text: 'se actualizó',
+    if (this.factura.idFactura) {
+      peticion = this.datap.putFactura(this.factura);
+      peticion.subscribe((resp) => {
+        Swal.fire({
+          title: this.factura.codigo,
+          icon: 'success',
+          text: 'se actualizó',
+          allowOutsideClick: false,
+          confirmButtonText:
+            '<i class="fas fa-receipt"></i> <a href="/facturaGenerada"><b>Ver factura</b></a>',
+        });
       });
+    } else {
+      peticion = this.datap.postFactura(this.factura);
+      peticion.subscribe((resp) => {
+        Swal.fire({
+          title: 'Factura Creada',
+          icon: 'success',
+          text: '¡Gracias por su compra!',
+          allowOutsideClick: false,
+          confirmButtonText:
+            '<i class="fas fa-receipt"></i> <a class="text-light" href="/facturaGenerada">Ver factura</a>',
+        });
+      });
+    }
+  }
+
+  selectProducto(idProducto: ProductosModel) {
+    this.producto2 = idProducto;
+  }
+
+  selectCliente(idCliente: ClientesModel) {
+    this.cliente2 = idCliente;
+  }
+
+  alertError(img?: any, positions?: any, msj?: any, timers?: any, wid?: any) {
+    Swal.fire({
+      icon: img,
+      text: msj,
+      showConfirmButton: false,
+      timer: timers,
+      width: wid,
+      position: positions,
     });
   }
 
-  selectProducto(id_producto: productosModel) {
-    this.producto2 = id_producto;
-    console.log(this.producto2);
-  }
+  addProducto(producto: ProductosModel) {
+    this.cantidadtab = this.producto2.cantidad;
 
-  selectCliente(idcliente: clientesModel) {
-    this.cliente2 = idcliente;
-  }
+    for (let index = 0; index < this.producto.length; index++) {
+      //
+      if (this.producto[index].idProducto === producto.idProducto) {
+        if (this.cantidadpro === 0) {
+          this.alertError(
+            'error',
+            'center',
+            'Por favor en cantidad escriba un numero diferente a 0',
+            1500
+          );
+        } else {
+          if (this.cantidadtab < this.cantidadpro) {
+            this.alertError(
+              'error',
+              'center',
+              `Solo se tiene existencia de ${this.producto2.cantidad} productos`,
+              1500
+            );
+          } else {
+            if (
+              this.prodFact[index] === undefined ||
+              this.prodFact[index].id_producto !== producto.idProducto
+            ) {
+              (this.totalf = 0), (this.subtotalf = 0), (this.ivaf = 0);
+              let peticion: Observable<any>;
+              this.cantidadtab -= this.cantidadpro;
+              this.producto[index].cantidad = this.cantidadtab;
+              peticion = this.datap.putProducto(producto);
+              peticion.subscribe((resp) => {
+                this.alertError(
+                  'success',
+                  'top-end',
+                  '',
+                  700,
+                  '12rem'
+                );
+              });
+              this.producto[index].cantidad = this.cantidadpro;
+              this.prodFact.push(this.producto2);
+            } else {
+              this.alertError(
+                'info',
+                'center',
+                'El producto que intenta agregar ya se encuentra en la factura',
+                1500
+              );
+            }
+            for (const ite of this.prodFact) {
+              console.log(ite);
+              ite.IVA = (ite.total * ite.Ivap * ite.cantidad) / 100;
+              ite.total = ite.total * ite.cantidad;
+              ite.subtotal = ite.total - ite.IVA;
 
-  addProducto(id_producto: productosModel) {
-    const cantidad = this.producto2.cantidad - $('#cantidadpro').val();
-    if (cantidad < 0) {
-      Swal.fire({
-        icon: 'error',
-        text: `Solo se tiene existencia de ${this.producto2.cantidad} productos`,
-      });
-    } else {
-      this.producto2.cantidad = $('#cantidadpro').val();
-      this.producto2.total = (
-        parseInt($('#cantidadpro').val()) * parseInt(this.producto2.subtotal)
-      ).toString();
-      this.prod_Fact.push(id_producto);
-
-      console.log(cantidad);
-      console.log(this.prod_Fact);
-      //this.selectProducto(id_producto);
+              this.ivaf += ite.IVA;
+              this.totalf += ite.total;
+              this.subtotalf += ite.subtotal;
+              console.log(ite);
+            }
+          }
+        }
+      }
     }
+  }
+
+  delProducto(index, producto: ProductosModel) {
+
+    let peticion: Observable<any>;
+    this.cantidadtab += this.cantidadpro;
+    this.producto[index].cantidad = this.cantidadtab;
+    // verificar
+    for (const ite of this.prodFact) {
+      ite.IVA = ite.IVA / $('#cantidadp')[0].innerHTML;
+      ite.total = ite.total / $('#cantidadp')[0].innerHTML;
+      ite.subtotal = ite.subtotal / $('#cantidadp')[0].innerHTML;
+    }
+    peticion = this.datap.putProducto(producto);
+    peticion.subscribe((resp) => {
+      this.alertError('success', 'top-end', '', 600, '12rem');
+    });
+    (this.totalf = 0), (this.subtotalf = 0), (this.ivaf = 0);
+    this.prodFact.splice(index, 1);
+  }
+
+  clearform(form: NgForm) {
+    form.resetForm();
+    this.prodFact.splice(0, this.prodFact.length);
   }
 }

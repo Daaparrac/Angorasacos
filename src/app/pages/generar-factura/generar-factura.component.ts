@@ -9,6 +9,6 @@ export class GenerarFacturaComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    //window.print();
+    window.print();
   }
 }

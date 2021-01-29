@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginUserModel } from '../../models/login';
 
 @Component({
   selector: 'app-header',

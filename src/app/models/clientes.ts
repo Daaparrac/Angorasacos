@@ -1,5 +1,5 @@
-export class clientesModel {
-  id_cliente: string;
+export class ClientesModel {
+  idCliente: string;
   nombre: string;
   documento: string;
   correo: string;

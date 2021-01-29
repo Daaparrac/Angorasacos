@@ -14,9 +14,10 @@
                 <input class="mt-2" class="fadeIn" type="text" [(ngModel)]="productos.codigo" name="codigo" placeholder="Código Producto" disabled>
                 <input type="text" class="fadeIn" [(ngModel)]="productos.nombre" (input)="createcodcompleto($event.target.value)" name="nombre" placeholder="Producto">
                 <input type="text" class="fadeIn" [(ngModel)]="productos.color" name="color" placeholder="Color" (input)="createcodcompleto($event.target.value)">
-                <input class="mt-2" type="text" [(ngModel)]="productos.estado_cambio" name="estadop" placeholder="Motivo ingreso">
+                <input class="mt-2" type="text" [(ngModel)]="productos.estadoCambio" name="estadop" placeholder="Motivo ingreso">
                 <input class="mt-2" type="text" [(ngModel)]="productos.imagen" name="imagen" placeholder="imagen base64" required>
                 <input type="text" class="fadeIn currency" [(ngModel)]="productos.total" name="total" placeholder="Precio Total" (input)="createIvaSub($event.target.value);">
+                <input type="text" class="fadeIn currency" [(ngModel)]="productos.IVA" name="IVA" placeholder="IVA" (input)="createIvaSub($event.target.value)">
                 <input type="text" class="fadeIn currency" [(ngModel)]="productos.IVA" name="IVA" placeholder="IVA" (input)="createIvaSub($event.target.value)">
                 <input type="text" class="fadeIn currency" [(ngModel)]="productos.subtotal" name="subtotal" placeholder="Precio sin IVA" (input)="createcodcompleto($event.target.value)">
                 <br>

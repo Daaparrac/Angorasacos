@@ -1,18 +1,20 @@
-import { tallamodel } from './talla';
-export class productosModel {
-  id_producto: string;
+import { Tallamodel } from './talla';
+// tslint:disable-next-line: class-name
+export class ProductosModel {
+  idProducto: string;
   codigo: string;
   nombre: string;
   color: string;
   imagen: string;
   talla: string;
-  //talla: tallamodel[];
+  // talla: tallamodel[];
   cantidad: number;
   estado: string;
-  estado_cambio: string;
-  subtotal: string;
-  IVA: string;
-  total: string;
+  estadoCambio: string;
+  subtotal: number;
+  IVA: number;
+  Ivap: number;
+  total: number;
 }
 
 /*

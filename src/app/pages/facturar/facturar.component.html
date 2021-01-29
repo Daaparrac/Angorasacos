@@ -12,7 +12,7 @@
                 <ng-option *ngFor="let item of producto" [value]="item">
                     {{item.codigo}} - {{ item.nombre }}</ng-option>
             </ng-select>
-            <input type="text" class="fadeIn" id="cantidadpro" required placeholder="Cantidad" maxlength="3">
+            <input type="number" class="fadeIn" [(ngModel)]="cantidadpro" name="cantidadpro" required placeholder="Cantidad" maxlength="3">
             <!--
             <div class="title my-4 text-center col-12">
                 <h4>DESCUENTO</h4>
@@ -21,9 +21,12 @@
             select type="text" class="fadeIn col-md-8" [(ngModel)]="descuento.id" name="xs" required placeholder="Código Descuento" maxlength="2"></select>
             <label class=" col-md-3 mr-2"> Valor: </label>
             <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.cantidad" name="valor" required placeholder="Valor" maxlength="2">-->
+
             <div class="text-center col-12 mt-4">
+
                 <a type="button" class="fadeIn fourth" (click)="addProducto(producto2)"><i class="fas fa-cart-plus"></i>
                     Agregar Producto</a>
+
             </div>
 
             <div class="title my-4 text-center col-12">
@@ -44,8 +47,8 @@
         </div>
         <!--tabla y total-->
         <div class="col-8">
-            <div class="mx-auto w-75 table-responsive h-75 my-4">
-                <table class="table table-striped ">
+            <div class="ml-5 w-100 table-responsive h-75 my-4 pl-5">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th scope="col">Código</th>
@@ -53,33 +56,42 @@
                             <th scope="col">Cantidad</th>
                             <th scope="col">Valor unitario</th>
                             <th scope="col">IVA</th>
+                            <th scope="col">IVA %</th>
                             <th scope="col">Total</th>
+                            <th scope="col">Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of prod_Fact">
-                            <th scope="row text-center">{{item.codigo}}
+                        <tr *ngFor="let item of prodFact;let i = index">
+                            <th scope="row text-center">
+                                {{item.codigo}}
                             </th>
                             <th>{{item.nombre}}</th>
-                            <th>{{item.cantidad}}</th>
-                            <th>{{item.subtotal}}</th>
-                            <th>{{item.IVA}}</th>
-                            <th>{{item.total}}</th>
+                            <th ngModelGroup='producto2.cantidad' name='cantidad' id="cantidadp">{{item.cantidad}}</th>
+                            <th>{{item.subtotal }}</th>
+                            <th>{{item.IVA}} </th>
+                            <th>{{item.Ivap}}%</th>
+                            <th ngModelGroup='producto2.total' name='total'>{{item.total}}</th>
+                            <th><a class="btn list-group-item-danger" (click)="delProducto(i,item)"><i
+                                        class="fas fa-trash-alt"></i></a>
+                            </th>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="col-6 position-absolute" style="right:0;">
                 <label class=" col-md-3 mr-2"> SUBTOTAL: </label>
-                <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.iva" name="subtotal" placeholder="Subtotal" maxlength="2">
+                <input type="text" class="fadeIn col-md-8" [(ngModel)]="subtotalf" name="subtotalf" placeholder="Subtotal" disabled>
                 <label class=" col-md-3 mr-2"> IVA: </label>
-                <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.iva" name="iva" placeholder="IVA" maxlength="2">
+                <input type="text" class="fadeIn col-md-8" [(ngModel)]="ivaf" name="ivaf" placeholder="IVA" disabled>
                 <label class=" col-md-3 mr-2"> TOTAL: </label>
-                <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.total" name="total" placeholder="Total" maxlength="2">
+                <input type="text" class="fadeIn col-md-8" [(ngModel)]="totalf" name="totalf" placeholder="Total" disabled>
                 <div class="text-center mt-2">
-                    <a type="button" class="fadeIn fourth mr-2" href="facturaGenerada"><i class="fas fa-receipt"></i>
+                    <a type="button" class="fadeIn fourth mr-2" (click)="guardar(prod_form)"><i
+                            class="fas fa-receipt"></i>
                         Pagar</a>
-                    <a type="button" class="fadeIn fourth " href="login"><i class="fas fa-broom"></i> Limpiar</a>
+                    <a type="button" class="fadeIn fourth " (click)="clearform(prod_form)"><i class="fas fa-broom"></i>
+                        Cancelar</a>
                 </div>
             </div>
 

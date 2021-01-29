@@ -28,7 +28,7 @@
                 <td>{{item.estado}}</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button class="btn list-group-item-warning" [routerLink]="['/producto', item.id_producto]"><i
+                        <button class="btn list-group-item-warning" [routerLink]="['/producto', item.idProducto]"><i
                                 class="far fa-edit"></i></button>
                         <button class="btn list-group-item-danger" *ngIf="item.estado == 'Activo'" (click)="ocultar(item)"><i class="far fa-eye-slash"></i></button>
                         <button class="btn list-group-item-success" *ngIf="item.estado == 'Inactivo'" (click)="

@@ -1,75 +1,75 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { clientesModel } from '../models/clientes';
-import { productosModel } from '../models/producto';
-import { facturaModel } from '../models/factura';
+import { ClientesModel } from '../models/clientes';
+import { ProductosModel } from '../models/producto';
+import { FacturaModel } from '../models/factura';
 import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceNameService {
   private url = 'https://angorasacos-25f71.firebaseio.com/';
 
-  constructor(private _http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-  //productos
+  // productos
 
   getProductos() {
-    return this._http
+    return this.http
       .get(`${this.url}/productos.json`)
       .pipe(map(this.crearArregloProducto));
   }
 
   getProductosActivos() {
-    return this._http
+    return this.http
       .get(`${this.url}/productos.json`)
       .pipe(map(this.crearArregloProductoActivos));
   }
 
   getProducto(id) {
-    return this._http.get(`${this.url}/productos/${id}.json`);
+    return this.http.get(`${this.url}/productos/${id}.json`);
   }
 
-  putProducto(producto: productosModel) {
+  putProducto(producto: ProductosModel) {
     const ProductoTemp = {
       ...producto,
     };
-    delete ProductoTemp.id_producto;
-    return this._http.put(
-      `${this.url}/productos/${producto.id_producto}.json`,
+    delete ProductoTemp.idProducto;
+    return this.http.put(
+      `${this.url}/productos/${producto.idProducto}.json`,
       ProductoTemp
     );
   }
 
-  postProducto(producto: productosModel) {
-    return this._http.post(`${this.url}/productos.json`, producto).pipe(
+  postProducto(producto: ProductosModel) {
+    return this.http.post(`${this.url}/productos.json`, producto).pipe(
       map((resp: any) => {
-        producto.id_producto = resp.name;
+        producto.idProducto = resp.name;
         return producto;
       })
     );
   }
   private crearArregloProducto(producto: object) {
-    const productos: productosModel[] = [];
+    const productos: ProductosModel[] = [];
     if (producto === null) {
       return [];
     }
 
     Object.keys(producto).forEach((key) => {
-      const producto2: productosModel = producto[key];
-      producto2.id_producto = key;
+      const producto2: ProductosModel = producto[key];
+      producto2.idProducto = key;
       productos.push(producto2);
     });
     return productos;
   }
   private crearArregloProductoActivos(producto: object) {
-    const productos: productosModel[] = [];
+    const productos: ProductosModel[] = [];
     if (producto === null) {
       return [];
     }
 
     Object.keys(producto).forEach((key) => {
-      const producto2: productosModel = producto[key];
-      producto2.id_producto = key;
+      const producto2: ProductosModel = producto[key];
+      producto2.idProducto = key;
       if (producto2.estado) {
         productos.push(producto2);
       }
@@ -77,91 +77,91 @@ export class ServiceNameService {
     return productos;
   }
 
-  //Factura
+  // Factura
 
   getFacturas() {
-    return this._http
+    return this.http
       .get(`${this.url}/facturas.json`)
       .pipe(map(this.crearArregloFactura));
   }
 
   getFactura(id) {
-    return this._http.get(`${this.url}/facturas/${id}.json`);
+    return this.http.get(`${this.url}/facturas/${id}.json`);
   }
 
-  putFactura(factura: facturaModel) {
+  putFactura(factura: FacturaModel) {
     const FacturaTemp = {
       ...factura,
     };
-    delete FacturaTemp.id_factura;
-    return this._http.put(
-      `${this.url}/facturas/${factura.id_factura}.json`,
+    delete FacturaTemp.idFactura;
+    return this.http.put(
+      `${this.url}/facturas/${factura.idFactura}.json`,
       FacturaTemp
     );
   }
 
-  postFactura(factura: facturaModel) {
-    return this._http.post(`${this.url}/facturas.json`, factura).pipe(
+  postFactura(factura: FacturaModel) {
+    return this.http.post(`${this.url}/facturas.json`, factura).pipe(
       map((resp: any) => {
-        factura.id_factura = resp.name;
+        factura.idFactura = resp.name;
         return factura;
       })
     );
   }
   private crearArregloFactura(factura: object) {
-    const facturas: facturaModel[] = [];
+    const facturas: FacturaModel[] = [];
     if (factura === null) {
       return [];
     }
 
     Object.keys(factura).forEach((key) => {
-      const facturas2: facturaModel = factura[key];
-      facturas2.id_factura = key;
+      const facturas2: FacturaModel = factura[key];
+      facturas2.idFactura = key;
       facturas.push(facturas2);
     });
     return facturas;
   }
 
-  //Clientes
+  // Clientes
 
   getClientes() {
-    return this._http
+    return this.http
       .get(`${this.url}/clientes.json`)
       .pipe(map(this.crearArregloCliente));
   }
 
   getCliente(id) {
-    return this._http.get(`${this.url}/clientes/${id}.json`);
+    return this.http.get(`${this.url}/clientes/${id}.json`);
   }
 
-  putCliente(cliente: clientesModel) {
+  putCliente(cliente: ClientesModel) {
     const ClienteTemp = {
       ...cliente,
     };
-    delete ClienteTemp.id_cliente;
-    return this._http.put(
-      `${this.url}/clientes/${cliente.id_cliente}.json`,
+    delete ClienteTemp.idCliente;
+    return this.http.put(
+      `${this.url}/clientes/${cliente.idCliente}.json`,
       ClienteTemp
     );
   }
 
-  postCliente(cliente: clientesModel) {
-    return this._http.post(`${this.url}/clientes.json`, cliente).pipe(
+  postCliente(cliente: ClientesModel) {
+    return this.http.post(`${this.url}/clientes.json`, cliente).pipe(
       map((resp: any) => {
-        cliente.id_cliente = resp.name;
+        cliente.idCliente = resp.name;
         return cliente;
       })
     );
   }
   private crearArregloCliente(cliente: object) {
-    const clientes: clientesModel[] = [];
+    const clientes: ClientesModel[] = [];
     if (cliente === null) {
       return [];
     }
 
     Object.keys(cliente).forEach((key) => {
-      const clientes2: clientesModel = cliente[key];
-      clientes2.id_cliente = key;
+      const clientes2: ClientesModel = cliente[key];
+      clientes2.idCliente = key;
       clientes.push(clientes2);
     });
     return clientes;

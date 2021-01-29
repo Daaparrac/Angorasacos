@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceNameService } from '../../services/data.service';
 import { ActivatedRoute } from '@angular/router';
-import { productosModel } from '../../models/producto';
+import { ProductosModel } from '../../models/producto';
 import Swal from 'sweetalert2';
 import { Observable } from 'rxjs';
 import { NgForm } from '@angular/forms';
@@ -14,27 +14,27 @@ import { SlugifyPipe } from '../../pipes/slugify.pipe';
 })
 export class ProductosComponent implements OnInit {
   id = null;
-  productos: productosModel = new productosModel();
+  productos: ProductosModel = new ProductosModel();
   firstcod = null;
   secondcod = null;
 
   constructor(
-    private _data: ServiceNameService,
-    private _activatedRoute: ActivatedRoute,
-    private _pipelearn: SlugifyPipe
+    private datap: ServiceNameService,
+    private activatedRoute: ActivatedRoute,
+    private pipeLearn: SlugifyPipe
   ) {}
 
   codigop = null;
   ngOnInit(): void {
-    this.id = this._activatedRoute.snapshot.paramMap.get('id');
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
     if (this.id !== 'nuevo') {
-      this._data.getProducto(this.id).subscribe((data: productosModel) => {
+      this.datap.getProducto(this.id).subscribe((data: ProductosModel) => {
         this.productos = data;
-        this.productos.id_producto = this.id;
+        this.productos.idProducto = this.id;
       });
     }
-    if (this.id == 'nuevo') {
-      this.productos.id_producto = null;
+    if (this.id === 'nuevo') {
+      this.productos.idProducto = null;
     }
   }
 
@@ -42,9 +42,9 @@ export class ProductosComponent implements OnInit {
     const textitos1 = `${this.productos.nombre} ${this.productos.color}`;
     const textitos2 = `${this.productos.talla}`;
     const textitos = `${this.productos.subtotal}`;
-    this.productos.codigo = `${this._pipelearn.transform(
+    this.productos.codigo = `${this.pipeLearn.transform(
       textitos1
-    )}${this._pipelearn.transform1(textitos2)} - ${this._pipelearn.transform2(
+    )}${this.pipeLearn.transform1(textitos2)} - ${this.pipeLearn.transform2(
       textitos
     )}`;
   }
@@ -58,10 +58,9 @@ export class ProductosComponent implements OnInit {
     const textoprecio = `${this.productos.total}`;
     const textoIVA = `${this.productos.IVA}`;
     const total =
-      parseInt(textoprecio) -
-      (parseInt(textoprecio) * parseInt(textoIVA)) / 100;
-    console.log(total);
-    this.productos.subtotal = `${total}`;
+      parseInt(textoprecio, 10) -
+      (parseInt(textoprecio, 10) * parseInt(textoIVA, 10)) / 100;
+    this.productos.subtotal = total;
     console.log(this.productos.IVA);
   }
 
@@ -71,7 +70,7 @@ export class ProductosComponent implements OnInit {
 
     console.log(textoIVA);
     console.log(textostotal);
-    this.productos.subtotal = `${this._pipelearn.preciop(textostotal)}`;
+    this.productos.subtotal = parseInt(this.pipeLearn.preciop(textostotal), 10);
     console.log(this.productos.subtotal);
   }
 
@@ -91,11 +90,11 @@ export class ProductosComponent implements OnInit {
 
     let peticion: Observable<any>;
 
-    if (this.productos.id_producto) {
-      peticion = this._data.putProducto(this.productos);
+    if (this.productos.idProducto) {
+      peticion = this.datap.putProducto(this.productos);
     } else {
       this.productos.estado = 'Activo';
-      peticion = this._data.postProducto(this.productos);
+      peticion = this.datap.postProducto(this.productos);
     }
 
     peticion.subscribe((resp) => {

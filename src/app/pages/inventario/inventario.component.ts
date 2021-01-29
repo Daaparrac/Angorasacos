@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ServiceNameService } from '../../services/data.service';
-import { productosModel } from '../../models/producto';
+import { ProductosModel } from '../../models/producto';
 import Swal from 'sweetalert2';
 import { Observable } from 'rxjs';
 declare var $: any;
@@ -11,17 +11,17 @@ declare var $: any;
   styleUrls: ['./inventario.component.scss'],
 })
 export class InventarioComponent implements OnInit {
-  constructor(private _data: ServiceNameService) {}
+  constructor(private datap: ServiceNameService) {}
 
-  productos: productosModel[] = [];
+  productos: ProductosModel[] = [];
   ngOnInit(): void {
-    this._data.getProductosActivos().subscribe((data) => {
+    this.datap.getProductosActivos().subscribe((data) => {
       console.log(data);
       this.productos = data;
     });
   }
 
-  ocultar(productos: productosModel) {
+  ocultar(productos: ProductosModel) {
     Swal.fire({
       title: 'Información Importante',
       text:
@@ -45,7 +45,7 @@ export class InventarioComponent implements OnInit {
 
         let peticion: Observable<any>;
 
-        peticion = this._data.putProducto(productos);
+        peticion = this.datap.putProducto(productos);
 
         peticion.subscribe((resp) => {
           Swal.fire({
@@ -57,7 +57,7 @@ export class InventarioComponent implements OnInit {
     });
   }
 
-  activar(productos: productosModel) {
+  activar(productos: ProductosModel) {
     Swal.fire({
       title: 'Información Importante',
       text:
@@ -81,7 +81,7 @@ export class InventarioComponent implements OnInit {
 
         let peticion: Observable<any>;
 
-        peticion = this._data.putProducto(productos);
+        peticion = this.datap.putProducto(productos);
 
         peticion.subscribe((resp) => {
           Swal.fire({
@@ -94,9 +94,9 @@ export class InventarioComponent implements OnInit {
   }
 
   search() {
-    $('#myInput').on('keyup', function () {
-      var value = $(this).val().toLowerCase();
-      $('#myTable tr').filter(function () {
+    $('#myInput').on('keyup', function() {
+      const value = $(this).val().toLowerCase();
+      $('#myTable tr').filter(function() {
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
       });
     });

@@ -1,15 +1,15 @@
-import { productosModel } from './producto';
-import { clientesModel } from './clientes';
-import { descuentoModel } from './descuento';
-export class facturaModel {
-  id_factura: string;
+import { ProductosModel } from './producto';
+import { ClientesModel } from './clientes';
+import { DescuentoModel } from './descuento';
+export class FacturaModel {
+  idFactura: string;
   codigo: string;
-  producto: productosModel[];
+  producto: ProductosModel[];
   cantidad: string;
   iva: string;
-  descuento: descuentoModel;
+  // descuento: descuentoModel;
   total: string;
   subtotal: string;
-  cliente: clientesModel;
+  cliente: ClientesModel;
   estado: boolean;
 }

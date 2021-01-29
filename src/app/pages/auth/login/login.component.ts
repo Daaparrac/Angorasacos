@@ -13,7 +13,7 @@ import { AuthService } from '../../../services/auth.service';
 export class LoginComponent implements OnInit {
   user: LoginUserModel = new LoginUserModel();
   recordarme = false;
-  constructor(private _authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     if (localStorage.getItem('email')) {
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     });
     Swal.showLoading();
 
-    this._authService.login(this.user).subscribe(
+    this.authService.login(this.user).subscribe(
       (res) => {
         if (this.recordarme) {
           localStorage.setItem('email', this.user.email);

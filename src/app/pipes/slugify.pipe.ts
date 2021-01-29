@@ -7,7 +7,7 @@ export class SlugifyPipe implements PipeTransform {
   transform(input: string): string {
     return input
       .concat(' ')
-      .replace(/([a-zA-Z]{0,} )/g, function (match) {
+      .replace(/([a-zA-Z]{0,} )/g, (match: string) => {
         return match.trim()[0];
       })
       .toLowerCase()
@@ -21,7 +21,7 @@ export class SlugifyPipe implements PipeTransform {
   transform1(input: string): string {
     return input
       .concat(' ')
-      .replace(/([a-zA-Z]{0,} )/g, function (match) {
+      .replace(/([a-zA-Z]{0,} )/g, (match: string) => {
         return match.trim()[0];
       })
       .toLowerCase()
@@ -34,7 +34,7 @@ export class SlugifyPipe implements PipeTransform {
 
   transform2(input: string): string {
     return input
-      .replace(/([0-9]+)/g, function (match) {
+      .replace(/([0-9]+)/g, (match: string) => {
         return match.trim()[0];
       })
       .replace(/\s+/g, '-')

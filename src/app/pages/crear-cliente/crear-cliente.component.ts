@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Observable } from 'rxjs';
 import { NgForm } from '@angular/forms';
-import { clientesModel } from '../../models/clientes';
+import { ClientesModel } from '../../models/clientes';
 
 @Component({
   selector: 'app-crear-cliente',
@@ -13,22 +13,22 @@ import { clientesModel } from '../../models/clientes';
 })
 export class CrearClienteComponent implements OnInit {
   id = null;
-  clientes: clientesModel = new clientesModel();
+  clientes: ClientesModel = new ClientesModel();
   constructor(
-    private _data: ServiceNameService,
-    private _activatedRoute: ActivatedRoute
+    private datap: ServiceNameService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.id = this._activatedRoute.snapshot.paramMap.get('id');
-    if (this.id != 'nuevo') {
-      this._data.getCliente(this.id).subscribe((data: clientesModel) => {
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    if (this.id === 'nuevo') {
+      this.datap.getCliente(this.id).subscribe((data: ClientesModel) => {
         this.clientes = data;
-        this.clientes.id_cliente = this.id;
+        this.clientes.idCliente = this.id;
       });
     }
-    if (this.id == 'nuevo') {
-      this.clientes.id_cliente = null;
+    if (this.id === 'nuevo') {
+      this.clientes.idCliente = null;
     }
   }
 
@@ -46,10 +46,10 @@ export class CrearClienteComponent implements OnInit {
 
     let peticion: Observable<any>;
 
-    if (this.clientes.id_cliente) {
-      peticion = this._data.putCliente(this.clientes);
+    if (this.clientes.idCliente) {
+      peticion = this.datap.putCliente(this.clientes);
     } else {
-      peticion = this._data.postCliente(this.clientes);
+      peticion = this.datap.postCliente(this.clientes);
     }
     peticion.subscribe((resp) => {
       Swal.fire({

@@ -11,7 +11,7 @@ export class AuthService {
   private apikey = 'AIzaSyC-9xiOytxlL6s-fnlqL8scqnxGn8xr3CQ';
 
   userToken: string;
-  constructor(private _http: HttpClient) {
+  constructor(private http: HttpClient) {
     this.leerToken();
   }
 
@@ -20,10 +20,11 @@ export class AuthService {
       ...usuario,
       returnSecureToken: true,
     };
-    return this._http
+    return this.http
       .post(`${this.url}signInWithPassword?key=${this.apikey}`, authData)
       .pipe(
         map((res) => {
+          // tslint:disable-next-line: no-string-literal
           this.guardarToken(res['idToken']);
           return res;
         })
@@ -36,7 +37,7 @@ export class AuthService {
   private guardarToken(idToken: string) {
     this.userToken = idToken;
     localStorage.setItem('Token', idToken);
-    let hoy = new Date();
+    const hoy = new Date();
     hoy.setSeconds(3600);
     localStorage.setItem('expira', hoy.getTime().toString());
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { facturaModel } from '../../models/factura';
+import { FacturaModel } from '../../models/factura';
 declare var $: any;
 @Component({
   selector: 'app-histo-factura',
@@ -7,15 +7,15 @@ declare var $: any;
   styleUrls: ['./histo-factura.component.scss'],
 })
 export class HistoFacturaComponent implements OnInit {
-  facturas: facturaModel;
+  facturas: FacturaModel;
   constructor() {}
 
   ngOnInit(): void {}
 
   search() {
-    $('#myInput').on('keyup', function () {
-      var value = $(this).val().toLowerCase();
-      $('#myTable tr').filter(function () {
+    $('#myInput').on('keyup', function() {
+      const value = $(this).val().toLowerCase();
+      $('#myTable tr').filter(function() {
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
       });
     });

@@ -1,4 +1,4 @@
-export class descuentoModel {
-  id_descuento: string;
+export class DescuentoModel {
+  idDescuento: string;
   descuento: string;
 }
