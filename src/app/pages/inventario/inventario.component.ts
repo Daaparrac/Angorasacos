@@ -11,7 +11,7 @@ declare var $: any;
   styleUrls: ['./inventario.component.scss'],
 })
 export class InventarioComponent implements OnInit {
-  constructor(private datap: ServiceNameService) {}
+  constructor(private datap: ServiceNameService) { }
 
   productos: ProductosModel[] = [];
   ngOnInit(): void {
@@ -94,9 +94,9 @@ export class InventarioComponent implements OnInit {
   }
 
   search() {
-    $('#myInput').on('keyup', function() {
+    $('#myInput').on('keyup', function () {
       const value = $(this).val().toLowerCase();
-      $('#myTable tr').filter(function() {
+      $('#myTable tr').filter(function () {
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
       });
     });

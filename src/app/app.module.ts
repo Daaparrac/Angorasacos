@@ -46,4 +46,4 @@ import { GenerarFacturaComponent } from './pages/generar-factura/generar-factura
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

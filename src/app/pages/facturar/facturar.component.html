@@ -1,5 +1,4 @@
 <app-header></app-header>
-
 <form #prod_form="ngForm" (ngSubmit)=guardar(prod_form) class="arribap">
     <!--form class="arribap"-->
     <div class="form-row w-100">
@@ -23,16 +22,12 @@
             <input type="text" class="fadeIn col-md-8" [(ngModel)]="factura.cantidad" name="valor" required placeholder="Valor" maxlength="2">-->
 
             <div class="text-center col-12 mt-4">
-
                 <a type="button" class="fadeIn fourth" (click)="addProducto(producto2)"><i class="fas fa-cart-plus"></i>
                     Agregar Producto</a>
-
             </div>
-
             <div class="title my-4 text-center col-12">
                 <h4>CLIENTE</h4>
             </div>
-
             <ng-select [ngModel]="selectedItem" class="fadeIn mx-auto w-75" (change)="selectCliente($event)" name="clientep">
                 <ng-option *ngFor="let item of cliente" [value]="item">
                     {{item.documento}} - {{ item.nombre }}</ng-option>
@@ -40,7 +35,6 @@
             <input type="text" class="fadeIn" [(ngModel)]="cliente2.correo" name="correo" placeholder="Código Cliente" maxlength="2" disabled>
             <input type="text" class="fadeIn" [(ngModel)]="cliente2.celular" name="telefono" placeholder="Teléfono" maxlength="2" disabled>
             <input type="text" class="fadeIn" [(ngModel)]="cliente2.direccion" name="direccion" placeholder="Dirección" maxlength="2" disabled>
-
             <div class="text-center col-12 mt-4">
                 <a type="button" class="fadeIn fourth" [routerLink]="['/crearCliente/nuevo']" routerLinkActive="router-link-active"><i class="fas fa-user-plus"></i> Crear Cliente Nuevo</a>
             </div>
@@ -94,8 +88,6 @@
                         Cancelar</a>
                 </div>
             </div>
-
         </div>
     </div>
-
 </form>

@@ -12,4 +12,5 @@ export class FacturaModel {
   subtotal: string;
   cliente: ClientesModel;
   estado: boolean;
+  fecha: Date;
 }

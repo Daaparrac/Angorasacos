@@ -28,6 +28,7 @@ export class FacturarComponent implements OnInit {
   cantidadpro = 0;
   cantidadtab: number;
   table: string;
+  fecha = new Date();
 
   constructor(
     private datap: ServiceNameService,
@@ -118,12 +119,7 @@ export class FacturarComponent implements OnInit {
       //
       if (this.producto[index].idProducto === producto.idProducto) {
         if (this.cantidadpro === 0) {
-          this.alertError(
-            'error',
-            'center',
-            'Por favor en cantidad escriba un numero diferente a 0',
-            1500
-          );
+          this.alertError('error', 'center', 'Por favor en cantidad escriba un numero diferente a 0', 1500);
         } else {
           if (this.cantidadtab < this.cantidadpro) {
             this.alertError(
@@ -137,49 +133,34 @@ export class FacturarComponent implements OnInit {
               this.prodFact[index] === undefined ||
               this.prodFact[index].id_producto !== producto.idProducto
             ) {
+              this.factura.fecha = this.fecha;
               (this.totalf = 0), (this.subtotalf = 0), (this.ivaf = 0);
               let peticion: Observable<any>;
               this.cantidadtab -= this.cantidadpro;
               this.producto[index].cantidad = this.cantidadtab;
               peticion = this.datap.putProducto(producto);
-              peticion.subscribe((resp) => {
-                this.alertError(
-                  'success',
-                  'top-end',
-                  '',
-                  700,
-                  '12rem'
-                );
-              });
+              peticion.subscribe((resp) => this.alertError('success', 'top-end', '', 700, '12rem'));
               this.producto[index].cantidad = this.cantidadpro;
               this.prodFact.push(this.producto2);
             } else {
-              this.alertError(
-                'info',
-                'center',
-                'El producto que intenta agregar ya se encuentra en la factura',
-                1500
-              );
+              this.alertError('info', 'center', 'El producto que intenta agregar ya se encuentra en la factura', 1500);
             }
             for (const ite of this.prodFact) {
-              console.log(ite);
               ite.IVA = (ite.total * ite.Ivap * ite.cantidad) / 100;
               ite.total = ite.total * ite.cantidad;
               ite.subtotal = ite.total - ite.IVA;
-
               this.ivaf += ite.IVA;
               this.totalf += ite.total;
               this.subtotalf += ite.subtotal;
-              console.log(ite);
             }
           }
         }
       }
     }
+    this.cantidadpro = 0;
   }
 
   delProducto(index, producto: ProductosModel) {
-
     let peticion: Observable<any>;
     this.cantidadtab += this.cantidadpro;
     this.producto[index].cantidad = this.cantidadtab;

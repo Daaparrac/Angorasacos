@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
     {
       imagen: 'assets/img/bill.png',
       texto: 'Facturar',
-      url: 'facturar',
+      url: 'factura/nueva',
     },
     {
       imagen: 'assets/img/folder.png',
@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
       url: 'histo_factura',
     },
   ];
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     this.email = localStorage.getItem('email');

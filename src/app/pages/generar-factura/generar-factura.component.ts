@@ -1,4 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { ServiceNameService } from '../../services/data.service';
+import { ActivatedRoute } from '@angular/router';
+import { ProductosModel } from '../../models/producto';
+import Swal from 'sweetalert2';
+import { Observable } from 'rxjs';
+import { NgForm } from '@angular/forms';
+import { SlugifyPipe } from '../../pipes/slugify.pipe';
+import { Tallamodel } from '../../models/talla';
+import { FacturaModel } from '../../models/factura';
 
 @Component({
   selector: 'app-generar-factura',
@@ -6,9 +15,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./generar-factura.component.scss'],
 })
 export class GenerarFacturaComponent implements OnInit {
-  constructor() {}
+  id = null;
+  unidadestotal = 0;
+  facturas: FacturaModel = new FacturaModel();
+  constructor(
+    private datap: ServiceNameService,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    window.print();
+
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.datap.getFactura(this.id).subscribe(
+      (data: FacturaModel) => {
+        this.facturas = data;
+        /*this.unidadestotal += data.producto[0].cantidad;
+        console.log(this.unidadestotal)*/
+      });
+
   }
 }

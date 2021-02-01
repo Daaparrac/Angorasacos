@@ -9,15 +9,15 @@
                 <div class="card-body">
                     <h5 class="w-100 card-title">{{item.codigo}} - {{item.nombre}}</h5>
                     <br>
-                    <p class="card-text">Precio: {{item.precio}}</p>
+                    <p class="card-text">Precio: ${{item.total}}</p>
                     <div class="row">
                         <div class="col-12 card-text pl-3 mb-3"> Tallas Disponibles:</div>
-                        <div class="botontalla mx-2" *ngIf="item.xs !=0 "> xs</div>
-                        <div class="botontalla mx-2" *ngIf="item.s !=0 "> s</div>
-                        <div class="botontalla mx-2" *ngIf="item.m !=0 "> m</div>
-                        <div class="botontalla mx-2" *ngIf="item.l !=0 "> l</div>
-                        <div class="botontalla mx-2" *ngIf="item.xl !=0 "> xl</div>
-                        <div class="botontalla mx-2" *ngIf="item.unica !=0 "> un</div>
+                        <div class="botontalla mx-2" *ngIf="item.talla[0].unidades !=0 "> xs</div>
+                        <div class="botontalla mx-2" *ngIf="item.talla[1].unidades !=0 "> s</div>
+                        <div class="botontalla mx-2" *ngIf="item.talla[2].unidades !=0 "> m</div>
+                        <div class="botontalla mx-2" *ngIf="item.talla[3].unidades !=0 "> l</div>
+                        <div class="botontalla mx-2" *ngIf="item.talla[4].unidades !=0 "> xl</div>
+                        <div class="botontalla mx-2" *ngIf="item.talla[5].unidades !=0 "> un</div>
                     </div>
                 </div>
             </div>

@@ -2,41 +2,67 @@
     <div class="wrapper fadeInDown">
         <div id="formContent">
             <!-- Tabs Titles -->
-
             <!-- Icon -->
             <div class="title my-4">
                 <h1>Producto</h1>
             </div>
-
             <!-- Login Form -->
             <form #prod_form="ngForm" (ngSubmit)=guardar(prod_form) class="hide-inputbtns">
-                <img [src]="productos.imagen" class="card-img-top w-75 mb-2" alt="...">
-                <input class="mt-2" class="fadeIn" type="text" [(ngModel)]="productos.codigo" name="codigo" placeholder="Código Producto" disabled>
-                <input type="text" class="fadeIn" [(ngModel)]="productos.nombre" (input)="createcodcompleto($event.target.value)" name="nombre" placeholder="Producto">
-                <input type="text" class="fadeIn" [(ngModel)]="productos.color" name="color" placeholder="Color" (input)="createcodcompleto($event.target.value)">
-                <input class="mt-2" type="text" [(ngModel)]="productos.estadoCambio" name="estadop" placeholder="Motivo ingreso">
-                <input class="mt-2" type="text" [(ngModel)]="productos.imagen" name="imagen" placeholder="imagen base64" required>
-                <input type="text" class="fadeIn currency" [(ngModel)]="productos.total" name="total" placeholder="Precio Total" (input)="createIvaSub($event.target.value);">
-                <input type="text" class="fadeIn currency" [(ngModel)]="productos.IVA" name="IVA" placeholder="IVA" (input)="createIvaSub($event.target.value)">
-                <input type="text" class="fadeIn currency" [(ngModel)]="productos.IVA" name="IVA" placeholder="IVA" (input)="createIvaSub($event.target.value)">
-                <input type="text" class="fadeIn currency" [(ngModel)]="productos.subtotal" name="subtotal" placeholder="Precio sin IVA" (input)="createcodcompleto($event.target.value)">
+                <img [src]='productos.imagen' class="card-img-top w-75 mb-2" alt="" id="img">
+                <input type="file" (change)="onUploadChange($event)" accept=".png, .jpg, .jpeg" />
+                <input class="w-50" class="fadeIn" type="text" [(ngModel)]="productos.codigo" name="codigo" placeholder="Código Producto" disabled required>
+                <input type="text" class="fadeIn" [(ngModel)]="productos.nombre" (input)="createcodcompleto($event.target.value)" name="nombre" placeholder="Producto" required>
+                <input type="text" class="fadeIn" [(ngModel)]="productos.color" name="color" placeholder="Color" (input)="createcodcompleto($event.target.value)" required>
+                <input class="mt-2" type="text" [(ngModel)]="productos.estadoCambio" name="estadop" placeholder="Motivo ingreso" required>
+                <input type="text" class="fadeIn currency" [(ngModel)]="productos.total" name="total" placeholder="Precio Total" (input)="createIvaSub($event.target.value);" required>
+                <input type="text" class="fadeIn currency" [(ngModel)]="productos.IVA" name="IVA" placeholder="IVA" (input)="createIvaSub($event.target.value)" required>
+                <input type="text" class="fadeIn currency" [(ngModel)]="productos.subtotal" name="subtotal" placeholder="Precio sin IVA" (input)="createcodcompleto($event.target.value)" disabled required>
                 <br>
                 <label> Tallas y cantidades:</label>
                 <br>
-                <label> Talla:</label>
-                <select type="text" class="fadeIn col-2" [(ngModel)]="productos.talla" name="cantidad" (change)="createcodcompleto($event.target.value)">
-                    <option value="XS">XS</option>
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-                    <option value="XL">XL</option>
-                    <option value="Unica">Unica</option>
-                </select>
-                <label> Cantidad:</label>
-                <input type="number" class="fadeIn col-2" [(ngModel)]="productos.cantidad" name="cantidad" placeholder="##" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;">
-                <button type="submit" class="fadeIn" value="Guardar">Guardar</button>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">
+                    Seleccionar cantidades
+                </button>
+                <button type="submit" [routerLink]="['/inventario']" class="fadeIn" value="Guardar">Guardar</button>
                 <a type="button" class="fadeIn fourth " [routerLink]="['/inventario']" routerLinkActive="router-link-active">Volver</a>
             </form>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <label> XS:</label>
+                            <input type="number" class="fadeIn col-3" min="0" max="100" [(ngModel)]="xs" name="xs" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" required>
+
+                            <label> S:</label>
+                            <input type="number" class="fadeIn col-3" min="0" max="100" [(ngModel)]="s" name="s" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" required>
+
+                            <label> M:</label>
+                            <input type="number" class="fadeIn col-3" min="0" max="100" [(ngModel)]="m" name="m" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" required>
+                        </div>
+                        <div class="modal-body">
+                            <label> L:</label>
+                            <input type="number" class="fadeIn col-2" min="0" max="100" [(ngModel)]="l" name="l" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" required>
+
+                            <label> XL:</label>
+                            <input type="number" class="fadeIn col-2" min="0" max="100" [(ngModel)]="xl" name="xl" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" required>
+
+                            <label> Unica:</label>
+                            <input type="number" class="fadeIn col-2" min="0" max="100" [(ngModel)]="unica" name="unica" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>

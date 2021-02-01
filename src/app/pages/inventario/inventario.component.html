@@ -11,27 +11,46 @@
                 <th scope="col">Color</th>
                 <th scope="col">Precio</th>
                 <th scope="col">Talla</th>
-                <th scope="col">Cantidad</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Opciones</th>
             </tr>
         </thead>
         <tbody id="myTable">
-            <tr *ngFor="let item of productos">
+            <tr *ngFor="let item of productos;">
                 <th scope="row text-center">{{item.codigo}}
                 </th>
                 <td>{{item.nombre}}</td>
                 <td>{{item.color}}</td>
                 <td>{{item.total}}</td>
-                <td>{{item.talla}}</td>
-                <td>{{item.cantidad}}</td>
+                <td style="width: 2%;">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button *ngIf='item.talla[0].unidades !== 0' type="button" class="btn btn-secondary">
+                            XS <span class="badge badge-light">{{item.talla[0].unidades}}</span>
+                        </button>
+                        <button *ngIf='item.talla[1].unidades !== 0' type="button" class="btn btn-dark">
+                            S <span class="badge badge-light">{{item.talla[1].unidades}}</span>
+                        </button>
+                        <button *ngIf='item.talla[2].unidades !== 0' type="button" class="btn btn-secondary">
+                            M <span class="badge badge-light">{{item.talla[2].unidades}}</span>
+                        </button>
+                        <button *ngIf='item.talla[3].unidades !== 0' type="button" class="btn btn-dark">
+                            L <span class="badge badge-light">{{item.talla[3].unidades}}</span>
+                        </button>
+                        <button *ngIf='item.talla[4].unidades !== 0' type="button" class="btn btn-secondary">
+                            XL <span class="badge badge-light">{{item.talla[4].unidades}}</span>
+                        </button>
+                        <button *ngIf='item.talla[5].unidades !== 0' type="button" class="btn btn-dark">
+                            Unica <span class="badge badge-light">{{item.talla[5].unidades}}</span>
+                        </button>
+                    </div>
+                </td>
                 <td>{{item.estado}}</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button class="btn list-group-item-warning" [routerLink]="['/producto', item.idProducto]"><i
                                 class="far fa-edit"></i></button>
-                        <button class="btn list-group-item-danger" *ngIf="item.estado == 'Activo'" (click)="ocultar(item)"><i class="far fa-eye-slash"></i></button>
-                        <button class="btn list-group-item-success" *ngIf="item.estado == 'Inactivo'" (click)="
+                        <button class="btn list-group-item-danger" *ngIf="item.estado === 'Activo'" (click)="ocultar(item)"><i class="far fa-eye-slash"></i></button>
+                        <button class="btn list-group-item-success" *ngIf="item.estado === 'Inactivo'" (click)="
                             activar(item)"><i class="far fa-eye"></i></button>
 
                     </div>

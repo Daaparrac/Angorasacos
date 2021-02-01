@@ -6,8 +6,8 @@ export class ProductosModel {
   nombre: string;
   color: string;
   imagen: string;
-  talla: string;
-  // talla: tallamodel[];
+  // talla: string;
+  talla: any[];
   cantidad: number;
   estado: string;
   estadoCambio: string;

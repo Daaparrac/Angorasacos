@@ -38,7 +38,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'facturar',
+    path: 'factura/nueva',
     component: FacturarComponent,
     canActivate: [AuthGuard],
   },
@@ -78,4 +78,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
