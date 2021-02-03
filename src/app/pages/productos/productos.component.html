@@ -24,7 +24,7 @@
                 <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">
                     Seleccionar cantidades
                 </button>
-                <button type="submit" [routerLink]="['/inventario']" class="fadeIn" value="Guardar">Guardar</button>
+                <button type="submit" class="fadeIn" value="Guardar">Guardar</button>
                 <a type="button" class="fadeIn fourth " [routerLink]="['/inventario']" routerLinkActive="router-link-active">Volver</a>
             </form>
             <!-- Modal -->
@@ -39,7 +39,7 @@
                         </div>
                         <div class="modal-body">
                             <label> XS:</label>
-                            <input type="number" class="fadeIn col-3" min="0" max="100" [(ngModel)]="xs" name="xs" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" required>
+                            <input type="number" class="fadeIn col-3" min="0" max="100" [(ngModel)]="xs" name="xs" pattern="/^-?\d+\.?\d*$/" ng-change="if(this.value.length==2) return false;" required>
 
                             <label> S:</label>
                             <input type="number" class="fadeIn col-3" min="0" max="100" [(ngModel)]="s" name="s" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" required>
