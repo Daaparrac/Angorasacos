@@ -11,7 +11,11 @@
                 <ng-option *ngFor="let item of producto" [value]="item">
                     {{item.codigo}} - {{ item.nombre }}</ng-option>
             </ng-select>
-            <input type="number" class="fadeIn" [(ngModel)]="cantidadpro" name="cantidadpro" required placeholder="Cantidad" maxlength="3">
+            <ng-select [ngModel]="selectedTallas" class="fadeIn mx-auto w-75" (change)="selectTalla($event)" name="codigo_talla" id="product">
+                <ng-option *ngFor="let item of selectedTalla" [value]="item">
+                    {{item.talla}}</ng-option>
+            </ng-select>
+            <input type="number" class="fadeIn" [(ngModel)]="cantidadpro" name="cantidadpro" required placeholder="Cantidad" maxlength="3" id="cantprod">
             <!--
             <div class="title my-4 text-center col-12">
                 <h4>DESCUENTO</h4>
@@ -47,10 +51,11 @@
                         <tr>
                             <th scope="col">Código</th>
                             <th scope="col">Producto</th>
+                            <th scope="col">Talla</th>
                             <th scope="col">Cantidad</th>
                             <th scope="col">Valor unitario</th>
-                            <th scope="col">IVA</th>
                             <th scope="col">IVA %</th>
+                            <th scope="col">IVA</th>
                             <th scope="col">Total</th>
                             <th scope="col">Eliminar</th>
                         </tr>
@@ -61,10 +66,12 @@
                                 {{item.codigo}}
                             </th>
                             <th>{{item.nombre}}</th>
-                            <th ngModelGroup='producto2.cantidad' name='cantidad' id="cantidadp">{{item.cantidad}}</th>
-                            <th>{{item.subtotal }}</th>
-                            <th>{{item.IVA}} </th>
-                            <th>{{item.Ivap}}%</th>
+                            <th>{{item.talla[0].talla}}</th>
+                            <th ngModelGroup='producto2.cantidad' name='cantidad' id="cantidadp">
+                                {{item.talla[0].unidades}}</th>
+                            <th>{{item.subtotal}}</th>
+                            <th>{{item.IVA}}%</th>
+                            <th>{{item.Ivap}}</th>
                             <th ngModelGroup='producto2.total' name='total'>{{item.total}}</th>
                             <th><a class="btn list-group-item-danger" (click)="delProducto(i,item)"><i
                                         class="fas fa-trash-alt"></i></a>
@@ -74,6 +81,7 @@
                 </table>
             </div>
             <div class="col-6 position-absolute" style="right:0;">
+                <input type="hidden" class="fadeIn col-md-8" [(ngModel)]="cantidadf" name="cantidadf">
                 <label class=" col-md-3 mr-2"> SUBTOTAL: </label>
                 <input type="text" class="fadeIn col-md-8" [(ngModel)]="subtotalf" name="subtotalf" placeholder="Subtotal" disabled>
                 <label class=" col-md-3 mr-2"> IVA: </label>

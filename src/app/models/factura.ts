@@ -5,12 +5,12 @@ export class FacturaModel {
   idFactura: string;
   codigo: string;
   producto: ProductosModel[];
-  cantidad: string;
-  iva: string;
+  cantidad: number;
+  iva: number;
   // descuento: descuentoModel;
-  total: string;
-  subtotal: string;
+  total: number;
+  subtotal: number;
   cliente: ClientesModel;
   estado: boolean;
-  fecha: Date;
+  fecha: string;
 }

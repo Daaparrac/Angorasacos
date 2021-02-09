@@ -13,7 +13,7 @@ import { AuthService } from '../../../services/auth.service';
 export class LoginComponent implements OnInit {
   user: LoginUserModel = new LoginUserModel();
   recordarme = false;
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('email')) {
@@ -51,4 +51,30 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
+  nodemailer = require('nodemailer');
+
+  transporter = this.nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'youremail@gmail.com',
+      pass: 'yourpassword'
+    }
+  });
+
+  mailOptions = {
+    from: 'youremail@gmail.com',
+    to: 'myfriend@yahoo.com',
+    subject: 'Sending Email using Node.js',
+    text: 'That was easy!'
+  };
+
+  transporter.sendMail(this.mailOptions, function(error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+
 }

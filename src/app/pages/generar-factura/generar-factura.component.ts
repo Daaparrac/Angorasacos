@@ -27,9 +27,9 @@ export class GenerarFacturaComponent implements OnInit {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.datap.getFactura(this.id).subscribe(
       (data: FacturaModel) => {
+        data.idFactura = this.id;
         this.facturas = data;
-        /*this.unidadestotal += data.producto[0].cantidad;
-        console.log(this.unidadestotal)*/
+        console.log(data)
       });
 
   }

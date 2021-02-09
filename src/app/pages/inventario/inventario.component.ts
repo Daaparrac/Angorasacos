@@ -16,7 +16,6 @@ export class InventarioComponent implements OnInit {
   productos: ProductosModel[] = [];
   ngOnInit(): void {
     this.datap.getProductosActivos().subscribe((data) => {
-      console.log(data);
       this.productos = data;
     });
   }

@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
     {
       imagen: 'assets/img/bill.png',
       texto: 'Facturar',
-      url: 'factura/nueva',
+      url: `factura_nueva`,
     },
     {
       imagen: 'assets/img/folder.png',

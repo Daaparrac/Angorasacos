@@ -38,7 +38,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'factura/nueva',
+    path: 'factura_nueva',
     component: FacturarComponent,
     canActivate: [AuthGuard],
   },
