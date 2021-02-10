@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { LoginUserModel } from '../../../models/login';
@@ -13,7 +13,7 @@ import { AuthService } from '../../../services/auth.service';
 export class LoginComponent implements OnInit {
   user: LoginUserModel = new LoginUserModel();
   recordarme = false;
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('email')) {
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
 
         setTimeout(() => {
           Swal.close();
-          this.router.navigateByUrl('/dashboard');
+          //this.router.navigateByUrl('/dashboard');
         }, 500);
       },
       (err) => {
@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  /*
   nodemailer = require('nodemailer');
 
   transporter = this.nodemailer.createTransport({
@@ -68,13 +69,12 @@ export class LoginComponent implements OnInit {
     subject: 'Sending Email using Node.js',
     text: 'That was easy!'
   };
-
-  transporter.sendMail(this.mailOptions, function(error, info) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Email sent: ' + info.response);
-    }
-  });
+    transporter.sendMail(this.mailOptions, function(error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });*/
 
 }

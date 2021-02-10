@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceNameService } from '../../services/data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from 'router';
 import Swal from 'sweetalert2';
 import { Observable } from 'rxjs';
 import { NgForm } from '@angular/forms';
@@ -17,7 +17,7 @@ export class CrearClienteComponent implements OnInit {
   constructor(
     private datap: ServiceNameService,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
