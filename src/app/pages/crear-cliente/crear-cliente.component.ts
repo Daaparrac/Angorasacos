@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceNameService } from '../../services/data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,RouterLink, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Observable } from 'rxjs';
 import { NgForm } from '@angular/forms';
-import { ClientesModel } from '../../models/clientes';
+import { ClientesModel } from 'src/app/models/clientes';
 
 @Component({
   selector: 'app-crear-cliente',
@@ -13,6 +13,11 @@ import { ClientesModel } from '../../models/clientes';
 })
 export class CrearClienteComponent implements OnInit {
   id = null;
+  nombre='';
+  documento:string;
+  correo:string;
+  celular:string;
+  direccion:string;
   clientes: ClientesModel = new ClientesModel();
   constructor(
     private datap: ServiceNameService,

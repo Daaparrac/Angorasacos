@@ -82,7 +82,7 @@ export class FacturarComponent implements OnInit {
           text: 'se actualizó',
           allowOutsideClick: false,
           confirmButtonText:
-            '<i class="fas fa-receipt"></i> <a href="/facturaGenerada"><b>Ver factura</b></a>',
+            `<i class="fas fa-receipt"></i> <a href="/facturaGenerada/${this.factura.idFactura}"><b>Ver factura</b></a>`,
         });
       });
     } else {
@@ -94,7 +94,7 @@ export class FacturarComponent implements OnInit {
           text: '¡Gracias por su compra!',
           allowOutsideClick: false,
           confirmButtonText:
-            '<i class="fas fa-receipt"></i> <a class="text-light" href="/facturaGenerada">Ver factura</a>',
+          `<i class="fas fa-receipt"></i> <a class="text-light" href="/facturaGenerada${this.factura.idFactura}">Ver factura</a>`,
         });
       });
     }
@@ -105,19 +105,15 @@ export class FacturarComponent implements OnInit {
   }
 
   addProducto(producto: ProductosModel) {
-    let cantTemp = producto.cantidad;
-    let comprobar_unidades: any;
-    let peticion: Observable<any>;
+    let cant = producto.cantidad - this.cantidadpro
     if (this.cantidadpro !== 0) {
-      if (producto.cantidad > this.cantidadpro) {
-
+      if (producto.cantidad >= this.cantidadpro) {
+        producto.cantidad = cant;
         console.log(producto)
-        producto.cantidad -= this.cantidadpro;
-        console.log(producto)
-        peticion = this.datap.putProducto(producto);
-
-        producto.cantidad = this.cantidadpro;
+        let peticion: Observable<any>;
+        peticion = this.datap.postProducto(producto);
         this.prodFact.push(producto)
+        this.prodFact[0].cantidad=this.cantidadpro;       
       }else {
         this.alertError('error', 'center', `Solo se tiene existencia de ${producto.cantidad} productos`, 1500);
       }
