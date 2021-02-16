@@ -18,10 +18,18 @@
                 <input type="text" class="fadeIn currency" [(ngModel)]="productos.IVA" name="IVA" placeholder="IVA" (input)="createIvaSub($event.target.value)" required>
                 <input type="text" class="fadeIn currency" [(ngModel)]="productos.subtotal" name="subtotal" placeholder="Precio sin IVA" (input)="createcodcompleto($event.target.value)" disabled required>
                 <br>
-                <label> Tallas y cantidades:</label>
-                <input type="text" class="fadeIn currency" [(ngModel)]="productos.subtotal" name="subtotal" placeholder="Precio sin IVA" (input)="createcodcompleto($event.target.value)" disabled required>
+                <label> Talla:</label>
+                <select type="text" class="fadeIn col-2" [(ngModel)]="productos.talla" name="cantidad" (change)="createcodcompleto($event.target.value)">
+                    <option value="XS">XS</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="Unica">Unica</option>
+                </select>
+                <label> Cantidad:</label>
+                <input type="number" class="fadeIn col-2" [(ngModel)]="productos.cantidad" name="cantidad" placeholder="##" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;">
                 
-                <br>
                 <!-- Button trigger modal -->
                 <!--button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">
                     Seleccionar cantidades
