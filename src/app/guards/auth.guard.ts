@@ -7,7 +7,7 @@ import {
   UrlTree,
   Router,
   UrlSegment,
-} from 'router';
+} from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 

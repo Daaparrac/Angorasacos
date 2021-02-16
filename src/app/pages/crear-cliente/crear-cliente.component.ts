@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceNameService } from '../../services/data.service';
-import { ActivatedRoute } from 'router';
+import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Observable } from 'rxjs';
 import { NgForm } from '@angular/forms';

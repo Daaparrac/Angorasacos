@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceNameService } from '../../services/data.service';
-import { ActivatedRoute, RouterLink, Router } from 'router';
+import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { ProductosModel } from '../../models/producto';
 import Swal from 'sweetalert2';
 import { Observable } from 'rxjs';

@@ -28,4 +28,34 @@ export class HistoFacturaComponent implements OnInit {
       });
     });
   }
+/*
+  mail() {
+
+    let nodemailer = require('nodemailer');
+    //console.log(nodemailer);
+
+
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'danielparrac26@gmail.com',
+        pass: 'Daniel12345.'
+      }
+    });
+
+    let mailOptions = {
+      from: 'danielparrac26@gmail.com',
+      to: 'daaparrac@correo.udistrital.edu.co',
+      subject: 'Sending Email using Node.js',
+      text: 'That was easy!',
+      html: "<p>HTML version of the message</p>"
+    };
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+  }*/
 }

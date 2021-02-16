@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FacturaModel } from '../../models/factura';
 import { ServiceNameService } from '../../services/data.service';
-import { ActivatedRoute } from 'router';
+import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { empty, Observable, of } from 'rxjs';
 import { NgForm } from '@angular/forms';

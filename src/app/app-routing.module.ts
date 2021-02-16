@@ -1,6 +1,6 @@
 import { from } from 'rxjs';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, CanActivate } from 'router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { InventarioComponent } from './pages/inventario/inventario.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
