@@ -19,11 +19,13 @@
                 <input type="text" class="fadeIn currency" [(ngModel)]="productos.subtotal" name="subtotal" placeholder="Precio sin IVA" (input)="createcodcompleto($event.target.value)" disabled required>
                 <br>
                 <label> Tallas y cantidades:</label>
+                <input type="text" class="fadeIn currency" [(ngModel)]="productos.subtotal" name="subtotal" placeholder="Precio sin IVA" (input)="createcodcompleto($event.target.value)" disabled required>
+                
                 <br>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">
+                <!--button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">
                     Seleccionar cantidades
-                </button>
+                </button-->
                 <button type="submit" class="fadeIn" value="Guardar">Guardar</button>
                 <a type="button" class="fadeIn fourth " [routerLink]="['/inventario']" routerLinkActive="router-link-active">Volver</a>
             </form>
