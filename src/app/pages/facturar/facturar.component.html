@@ -9,12 +9,12 @@
             </div>
             <ng-select [ngModel]="selectedItem" class="fadeIn mx-auto w-75" (change)="selectProducto($event)" name="codigo_pro" id="product">
                 <ng-option *ngFor="let item of producto" [value]="item">
-                    {{item.codigo}} - {{ item.nombre }}</ng-option>
+                    {{item.codigo}} - {{ item.nombre }} <span class="d-none">{{ item.talla }}</span> </ng-option>
             </ng-select>
-            <ng-select [ngModel]="selectedTallas" class="fadeIn mx-auto w-75" (change)="selectTalla($event)" name="codigo_talla" id="product">
+            <!--ng-select [ngModel]="selectedTallas" class="fadeIn mx-auto w-75" (change)="selectTalla($event)" name="codigo_talla" id="product">
                 <ng-option *ngFor="let item of selectedTalla" [value]="item">
                     {{item.talla}}</ng-option>
-            </ng-select>
+            </ng-select-->
             <input type="number" class="fadeIn" [(ngModel)]="cantidadpro" name="cantidadpro" required placeholder="Cantidad" maxlength="3" id="cantprod">
             <!--
             <div class="title my-4 text-center col-12">
@@ -34,7 +34,7 @@
             </div>
             <ng-select [ngModel]="selectedItem" class="fadeIn mx-auto w-75" (change)="selectCliente($event)" name="clientep">
                 <ng-option *ngFor="let item of cliente" [value]="item">
-                    {{item.documento}} - {{ item.nombre }}</ng-option>
+                    {{item.documento}} - {{ item.nombre }} </ng-option>
             </ng-select>
             <input type="text" class="fadeIn" [(ngModel)]="cliente2.correo" name="correo" placeholder="Código Cliente" maxlength="2" disabled>
             <input type="text" class="fadeIn" [(ngModel)]="cliente2.celular" name="telefono" placeholder="Teléfono" maxlength="2" disabled>
@@ -66,9 +66,9 @@
                                 {{item.codigo}}
                             </th>
                             <th>{{item.nombre}}</th>
-                            <th>{{item.talla[0].talla}}</th>
+                            <th>{{item.talla}}</th>
                             <th ngModelGroup='producto2.cantidad' name='cantidad' id="cantidadp">
-                                {{item.talla[0].unidades}}</th>
+                                {{item.cantidad}}</th>
                             <th>{{item.subtotal}}</th>
                             <th>{{item.IVA}}%</th>
                             <th>{{item.Ivap}}</th>

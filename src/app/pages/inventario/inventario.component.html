@@ -21,26 +21,11 @@
                 </th>
                 <td>{{item.nombre}}</td>
                 <td>{{item.color}}</td>
-                <td>{{item.total}}</td>
+                <td>${{item.total}}</td>
                 <td style="width: 2%;">
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button *ngIf='item.talla[0].unidades !== 0' type="button" class="btn btn-secondary">
-                            XS <span class="badge badge-light">{{item.talla[0].unidades}}</span>
-                        </button>
-                        <button *ngIf='item.talla[1].unidades !== 0' type="button" class="btn btn-dark">
-                            S <span class="badge badge-light">{{item.talla[1].unidades}}</span>
-                        </button>
-                        <button *ngIf='item.talla[2].unidades !== 0' type="button" class="btn btn-secondary">
-                            M <span class="badge badge-light">{{item.talla[2].unidades}}</span>
-                        </button>
-                        <button *ngIf='item.talla[3].unidades !== 0' type="button" class="btn btn-dark">
-                            L <span class="badge badge-light">{{item.talla[3].unidades}}</span>
-                        </button>
-                        <button *ngIf='item.talla[4].unidades !== 0' type="button" class="btn btn-secondary">
-                            XL <span class="badge badge-light">{{item.talla[4].unidades}}</span>
-                        </button>
-                        <button *ngIf='item.talla[5].unidades !== 0' type="button" class="btn btn-dark">
-                            Unica <span class="badge badge-light">{{item.talla[5].unidades}}</span>
+                            {{item.talla}}<span class="badge badge-light ml-1">{{item.cantidad}}</span>
                         </button>
                     </div>
                 </td>

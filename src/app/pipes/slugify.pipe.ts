@@ -35,7 +35,7 @@ export class SlugifyPipe implements PipeTransform {
   transform2(input: string): string {
     return input
       .replace(/([0-9]+)/g, (match: string) => {
-        return match.trim()[0];
+        return match.substr(0,3);
       })
       .replace(/\s+/g, '-')
       .replace(/[^\w\-]+/g, '')

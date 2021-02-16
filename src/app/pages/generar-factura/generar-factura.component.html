@@ -47,7 +47,6 @@
                 <label for="">{{facturas.fecha}}</label><br>
                 <label for="">(+57) 304 4984526</label><br>
                 <label for="">Cliente Online</label><br>
-                <label for="">Contra Entrega</label><br>
                 <label for="">Bogotá</label><br>
             </div>
         </div>
@@ -72,23 +71,12 @@
                     <th scope="row text-center">{{item.codigo}}
                     </th>
                     <th>{{item.nombre}}</th>
-                    <th>{{item.talla[0].talla}}</th>
-                    <th>{{item.talla[0].unidades}}</th>
+                    <th>{{item.talla}}</th>
+                    <th>{{item.cantidad}}</th>
                     <th>${{item.subtotal}}</th>
                     <th>${{item.IVA}}</th>
                     <th>{{item.Ivap}}%</th>
                     <th>${{item.total}}</th>
-                </tr>
-                <tr>
-                    <th scope="row text-center">001
-                    </th>
-                    <th>Saco Tejido</th>
-                    <th>S</th>
-                    <th>2</th>
-                    <th>$45.000</th>
-                    <th>4200</th>
-                    <th>19</th>
-                    <th>$49.200</th>
                 </tr>
             </tbody>
         </table>
@@ -96,13 +84,14 @@
 
     <div class=" border border-dark mt-3 col-12 mr-5">
         <div class="row">
-            <div class="col-4">
+            <div class="col-3">
                 <img style="width: 15rem; padding-top: 0.8rem;" src="https://ventadeguiaspantone.com/wp-content/uploads/2019/08/gracias-por-tu-compra.png" alt="Logo">
 
             </div>
-            <div class="col-4" style="font-weight: bold; font-size: x-large;">
+            <div class="col-5" style="font-weight: bold; font-size: large;">
                 <div style="height: 1.8rem;"></div>
                 <label for="">Total Unidades: </label> <label for=""> {{facturas.cantidad}}</label> <br>
+                <label for=""> {{totalletras}}</label> <br>
             </div>
             <div class="col-4">
                 <div class="row">
