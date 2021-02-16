@@ -4,6 +4,7 @@ import { ClientesModel } from '../models/clientes';
 import { ProductosModel } from '../models/producto';
 import { FacturaModel } from '../models/factura';
 import { map } from 'rxjs/operators';
+import * as express from './../../../../backendAngora/app.js';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceNameService {
@@ -166,4 +167,24 @@ export class ServiceNameService {
     });
     return clientes;
   }
+  /* Servidor*/
+
+  postServidor(body: string) {
+    console.log(body)
+    console.log(this.http.post(`localhost:3000/formulario`, body))
+    return this.http.post(`localhost:3000/formulario`,`{
+      accepted: [ 'daniel.parra@skaphe.com' ],
+      rejected: [],
+      envelopeTime: 230,
+      messageTime: 421,
+      messageSize: 283,
+      response: '250 2.0.0 OK  1613454052 x25sm2623555uar.11 - gsmtp',
+      envelope: {
+        from: 'danielparrac26@gmail.com',
+        to: [ 'daniel.parra@skaphe.com' ]
+      },
+      messageId: '<5bb0c399-f360-fb5d-a3e3-22ca7a3b6f38@gmail.com>'
+    }`);
+  }
 }
+
