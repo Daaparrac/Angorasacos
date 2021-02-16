@@ -94,7 +94,7 @@ export class FacturarComponent implements OnInit {
           text: '¡Gracias por su compra!',
           allowOutsideClick: false,
           confirmButtonText:
-          `<i class="fas fa-receipt"></i> <a class="text-light" href="/facturaGenerada${this.factura.idFactura}">Ver factura</a>`,
+          `<i class="fas fa-receipt"></i> <a class="text-light" href="/facturaGenerada/${this.factura.idFactura}">Ver factura</a>`,
         });
       });
     }
@@ -110,10 +110,13 @@ export class FacturarComponent implements OnInit {
       if (producto.cantidad >= this.cantidadpro) {
         producto.cantidad = cant;
         console.log(producto)
-        let peticion: Observable<any>;
-        peticion = this.datap.postProducto(producto);
+        let peticiones: Observable<any>;
+        peticiones = this.datap.postProducto(producto);
         this.prodFact.push(producto)
-        this.prodFact[0].cantidad=this.cantidadpro;       
+        this.prodFact[0].cantidad=this.cantidadpro;
+        this.prodFact[0].total=this.cantidadpro*producto.total;
+        this.prodFact[0].Ivap = this.cantidadpro*producto.Ivap;
+        this.prodFact[0].subtotal=this.cantidadpro*producto.subtotal;       
       }else {
         this.alertError('error', 'center', `Solo se tiene existencia de ${producto.cantidad} productos`, 1500);
       }

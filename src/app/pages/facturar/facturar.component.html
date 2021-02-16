@@ -36,9 +36,9 @@
                 <ng-option *ngFor="let item of cliente" [value]="item">
                     {{item.documento}} - {{ item.nombre }} </ng-option>
             </ng-select>
-            <input type="text" class="fadeIn" [(ngModel)]="cliente2.correo" name="correo" placeholder="Código Cliente" maxlength="2" disabled>
-            <input type="text" class="fadeIn" [(ngModel)]="cliente2.celular" name="telefono" placeholder="Teléfono" maxlength="2" disabled>
-            <input type="text" class="fadeIn" [(ngModel)]="cliente2.direccion" name="direccion" placeholder="Dirección" maxlength="2" disabled>
+            <input type="text" class="fadeIn" [(ngModel)]="cliente2.correo" name="correo" placeholder="Código Cliente" maxlength="2" disabled required>
+            <input type="text" class="fadeIn" [(ngModel)]="cliente2.celular" name="telefono" placeholder="Teléfono" maxlength="2" disabled required>
+            <input type="text" class="fadeIn" [(ngModel)]="cliente2.direccion" name="direccion" placeholder="Dirección" maxlength="2" disabled required>
             <div class="text-center col-12 mt-4">
                 <a type="button" class="fadeIn fourth" [routerLink]="['/crearCliente/nuevo']" routerLinkActive="router-link-active"><i class="fas fa-user-plus"></i> Crear Cliente Nuevo</a>
             </div>
@@ -54,7 +54,7 @@
                             <th scope="col">Talla</th>
                             <th scope="col">Cantidad</th>
                             <th scope="col">Valor unitario</th>
-                            <th scope="col">IVA %</th>
+                            <th scope="col">IVA%</th>
                             <th scope="col">IVA</th>
                             <th scope="col">Total</th>
                             <th scope="col">Eliminar</th>

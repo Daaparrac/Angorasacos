@@ -9,6 +9,7 @@ import * as express from './../../../../backendAngora/app.js';
 @Injectable({ providedIn: 'root' })
 export class ServiceNameService {
   private url = 'https://angorasacos-25f71.firebaseio.com/';
+  private url2 = 'localhost:3000/';
 
   constructor(private http: HttpClient) {}
 
@@ -172,19 +173,12 @@ export class ServiceNameService {
   postServidor(body: string) {
     console.log(body)
     console.log(this.http.post(`localhost:3000/formulario`, body))
-    return this.http.post(`localhost:3000/formulario`,`{
-      accepted: [ 'daniel.parra@skaphe.com' ],
-      rejected: [],
-      envelopeTime: 230,
-      messageTime: 421,
-      messageSize: 283,
-      response: '250 2.0.0 OK  1613454052 x25sm2623555uar.11 - gsmtp',
-      envelope: {
-        from: 'danielparrac26@gmail.com',
-        to: [ 'daniel.parra@skaphe.com' ]
-      },
-      messageId: '<5bb0c399-f360-fb5d-a3e3-22ca7a3b6f38@gmail.com>'
-    }`);
+    try {
+      
+    return this.http.post(`${this.url2}/formulario`,body);
+    } catch (error) {
+      return console.log(error);
+    }
   }
 }
 

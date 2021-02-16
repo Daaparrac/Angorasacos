@@ -101,11 +101,12 @@ export class InventarioComponent implements OnInit {
     });
   }
   mail(){
-    console.log(
-    this.datap.postServidor(
-      'this.productos[0]'
-    ))
-    
-    return this.datap.postServidor('this.productos[0]')
+
+  try {
+    this.datap.postServidor('this.productos[0]')
+  } catch (error) {
+    return console.log(error);
+  }
+  
   }
 }
