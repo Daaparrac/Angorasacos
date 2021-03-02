@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FacturaModel } from '../../models/factura';
 import { ServiceNameService } from '../../services/data.service';
+import * as Chart from 'chart.js';
+import * as moment from 'moment';
 declare var $: any;
 @Component({
   selector: 'app-histo-factura',
@@ -14,12 +16,57 @@ export class HistoFacturaComponent implements OnInit {
   ngOnInit(): void {
     this.datap.getFacturas().subscribe(
       (data) => {
-        console.log(data)
         this.facturas = data;
+        this.graph(this.facturas);
       }
     );
   }
 
+  graph(hi){
+    console.log(hi)
+    let data=[];
+    let labels= [];
+     for (const element of hi) {
+       labels.push(element.fecha);
+       data.push(element.total)
+    }
+
+    let myChart = new Chart('myChart', {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Total de compras por dia',
+          data: data,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+            xAxes: [{
+                type: 'time',
+                distribution: 'series'
+            }]
+        }
+      }
+    });
+  }
   search() {
     $('#myInput').on('keyup', function () {
       const value = $(this).val().toLowerCase();
@@ -28,34 +75,5 @@ export class HistoFacturaComponent implements OnInit {
       });
     });
   }
-/*
-  mail() {
 
-    let nodemailer = require('nodemailer');
-    //console.log(nodemailer);
-
-
-    let transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: 'danielparrac26@gmail.com',
-        pass: 'Daniel12345.'
-      }
-    });
-
-    let mailOptions = {
-      from: 'danielparrac26@gmail.com',
-      to: 'daaparrac@correo.udistrital.edu.co',
-      subject: 'Sending Email using Node.js',
-      text: 'That was easy!',
-      html: "<p>HTML version of the message</p>"
-    };
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Email sent: ' + info.response);
-      }
-    });
-  }*/
 }

@@ -25,12 +25,17 @@ export class GenerarFacturaComponent implements OnInit {
         data.idFactura = this.id;
         this.facturas = data;
         this.totalletras=this.NumeroALetras(data.total)
-        
-        console.log(this.NumeroALetras(data.total))
-        console.log(data)
       });
 
   }
+  
+  print(nombreDiv) {
+    let contenido= document.getElementById(nombreDiv).innerHTML;
+    let contenidoOriginal= document.body.innerHTML;
+    document.body.innerHTML = contenido;
+    window.print();
+    document.body.innerHTML = contenidoOriginal;
+}
   
 
   Unidades(num){

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -29,9 +30,12 @@ export class DashboardComponent implements OnInit {
       url: 'histo_factura',
     },
   ];
+
   constructor() { }
 
   ngOnInit(): void {
     this.email = localStorage.getItem('email');
   }
+
+
 }

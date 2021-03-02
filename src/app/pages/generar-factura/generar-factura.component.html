@@ -1,4 +1,4 @@
-<div class="row m-3 p-3 border border-dark">
+<div class="row m-3 p-3 border border-dark" id="hoja">
     <div class="col-7">
         <div class="row">
             <div class="col-3"><img style="width: 8rem;" src="../../../assets/img/Angora.png" alt="Logo"></div>
@@ -45,7 +45,7 @@
             <div class="col-6 border border-dark">
                 <label for="" style="font-size: 0.9rem;">{{facturas.idFactura}}</label><br>
                 <label for="">{{facturas.fecha}}</label><br>
-                <label for="">(+57) 304 4984526</label><br>
+                <label for="">(+57) 314 3648863</label><br>
                 <label for="">Cliente Online</label><br>
                 <label for="">Bogotá</label><br>
             </div>
@@ -61,8 +61,8 @@
                     <th scope="col">Talla</th>
                     <th scope="col">Cantidad</th>
                     <th scope="col">Valor unitario</th>
+                    <th scope="col">IVA%</th>
                     <th scope="col">IVA</th>
-                    <th scope="col">IVA %</th>
                     <th scope="col">Total</th>
                 </tr>
             </thead>
@@ -74,8 +74,8 @@
                     <th>{{item.talla}}</th>
                     <th>{{item.cantidad}}</th>
                     <th>${{item.subtotal}}</th>
-                    <th>${{item.IVA}}</th>
-                    <th>{{item.Ivap}}%</th>
+                    <th>{{item.IVA}}%</th>
+                    <th>${{item.Ivap}}</th>
                     <th>${{item.total}}</th>
                 </tr>
             </tbody>
@@ -118,4 +118,7 @@
         </div>
     </div>
 
+</div>
+<div style="text-align: center;">
+    <button type="button"  class="btn btn-dark" (click)="print('hoja')"><i class="fas fa-receipt"></i> Imprimir</button>
 </div>
